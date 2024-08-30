@@ -7,274 +7,46 @@
 </head>
 
 <body>
-  <div class="input-container">
+  <header class="title">
+    <h1>Opeazione obesità</h1>
+  </header>
+  
+  <!-- <div class="form-container">
+    
+    <div class="form-field">
+      <label id="selectLabel" for="food">Che hai mangiato oggi?</label>    
+      <select id="foodSelect" name="food">
+        <option class="food-select-option" value="">-</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label id="quantityLabel" for="quantity">Quanto?</label>    
+      <input type="text" id="quantity"></input>
+      <p id="unity"></p>
+    </div>
+
+    <div id="foodListRoot"></div>
+  </div> -->
+    
+
+  <div class="search-container">
     <input type="text" id="search" placeholder="Cerca...">
   </div>
 
   <div class="table-container">
     <table id="foodTable">
       <tr>
-        <th>Cibo</th>
-        <th>KCalorie</th>
-        <th>Nutrienti</th>
-        <th>Categoria</th>
+        <th class="name-col">Cibo</th>
+        <th class="cal-col">KCal</th>
+        <th class="nutrient-col">Nutrienti</th>
+        <th class="category-col">Categoria</th>
       </tr>
-
-      <tr>
-        <td>Biscotto</td>
-        <td>40 l'uno</td>
-        <td>Carboidrati</td>
-        <td>Colazione</td>
-      </tr>
-
-      <tr>
-        <td>Cornetto</td>
-        <td>200 l'uno</td>
-        <td>Carboidrati</td>
-        <td>Colazione</td>
-      </tr>
-
-      <tr>
-        <td>Yoghurt</td>
-        <td>120 l'uno</td>
-        <td>Carboidrati</td>
-        <td>Colazione</td>
-      </tr>
-
-      <tr>
-        <td>Pasta</td>
-        <td>400 a piatto pieno</td>
-        <td>Carboidrati</td>
-        <td>Primi</td>
-      </tr>
-
-      <tr>
-        <td>Risotto</td>
-        <td>350 a piatto pieno</td>
-        <td>Carboidrati</td>
-        <td>Primi</td>
-      </tr>
-
-      <tr>
-        <td>Minestrone</td>
-        <td>350 a piatto pieno</td>
-        <td>Carboidrati, proteine</td>
-        <td>Primi</td>
-      </tr>
-
-      <tr>
-        <td>Minesta</td>
-        <td>200 a piatto pieno</td>
-        <td>Carboidrati</td>
-        <td>Primi</td>
-      </tr>
-
-      <tr>
-        <td>Braciola</td>
-        <td>330 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Bistecca manzo</td>
-        <td>550 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Bistecca manzo solo filetto</td>
-        <td>250 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Fettina</td>
-        <td>180 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Cotoletta</td>
-        <td>200 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Fettina di pollo</td>
-        <td>150 l'una </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Pesce al forno</td>
-        <td>300 l'uno (pesce intero) </td>
-        <td>Proteine</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Pizza</td>
-        <td>700 l'una</td>
-        <td>Carboidrati</td>
-        <td>Secondi</td>
-      </tr>
-
-      <tr>
-        <td>Patate</td>
-        <td>100 calorie a porzione</td>
-        <td>Carboidrati</td>
-        <td>Contorni</td>
-      </tr>
-
-      <tr>
-        <td>Piselli</td>
-        <td>80 calorie a porzione (4 / 5 cucchiaiate)</td>
-        <td>Carboidrati, proteine</td>
-        <td>Legumi, contorni</td>
-      </tr>
-
-      <tr>
-        <td>Ceci</td>
-        <td>300 calorie a barattolo</td>
-        <td>Carboidrati, proteine</td>
-        <td>Legumi</td>
-      </tr>
-
-      <tr>
-        <td>Fagioli</td>
-        <td>200 calorie a barattolo</td>
-        <td>Carboidrati, proteine</td>
-        <td>Legumi</td>
-      </tr>
-
-      <tr>
-        <td>Stecco conad</td>
-        <td>240 l'uno</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Torta Romantica</td>
-        <td>250 a fetta</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Torta Conad</td>
-        <td>200 a fetta</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Cremino</td>
-        <td>122 l'uno</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Cono</td>
-        <td>240 l'uno</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Vaschetta gelato</td>
-        <td>200 a coppetta</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Dolci</td>
-      </tr>
-
-      <tr>
-        <td>Pane</td>
-        <td>50 a fetta</td>
-        <td>Carboidrati</td>
-        <td>Affettati & pane</td>
-      </tr>
-
-      <tr>
-        <td>Pecorino</td>
-        <td>100 a fetta</td>
-        <td>Grassi, proteine</td>
-        <td>Affettati & pane</td>
-      </tr>
-
-      <tr>
-        <td>Salame</td>
-        <td>80 a fetta</td>
-        <td>Grassi, proteine</td>
-        <td>Affettati & pane</td>
-      </tr>
-
-      <tr>
-        <td>Prosciutto crudo</td>
-        <td>40 a fetta</td>
-        <td>Grassi, proteine</td>
-        <td>Affettati & pane</td>
-      </tr>
-
-      <tr>
-        <td>Philadeplhia</td>
-        <td>250 a porzione mini (quella che compriamo di solito)</td>
-        <td>Grassi, proteine</td>
-        <td>Affettati & pane</td>
-      </tr>
-
-      <tr>
-        <td>Banana</td>
-        <td>120 l'una</td>
-        <td>Carboidrati</td>
-        <td>Frutta</td>
-      </tr>
-
-      <tr>
-        <td>Uva</td>
-        <td>6 a chicco</td>
-        <td>Carboidrati</td>
-        <td>Frutta</td>
-      </tr>
-
-      <tr>
-        <td>Avocado</td>
-        <td>350 l'uno (intero)</td>
-        <td>Grassi</td>
-        <td>Frutta</td>
-      </tr>
-
-      <tr>
-        <td>Albicocca, mela, pera, pesca, prugna, ...</td>
-        <td>25 l'uno</td>
-        <td>Carboidrati</td>
-        <td>Frutta</td>
-      </tr>
-
-      <tr>
-        <td>Ketchup</td>
-        <td>10 a cucchiaino</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Salse</td>
-      </tr>
-
-      <tr>
-        <td>Maionese</td>
-        <td>40 a cucchiaino</td>
-        <td>Carboidrati (zuccheri raffinati)</td>
-        <td>Salse</td>
-      </tr>
-
     </table>
   </div>
-  <script src="index.js"></script>
+
+  <script src="load.js"></script>
+  <script src="search.js"></script>
 </body>
 
 </html>

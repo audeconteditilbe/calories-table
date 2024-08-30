@@ -1,14 +1,36 @@
-/* Basic table styling */
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Table */
 .table-container {
   width: 100%;
-  overflow-x: auto; /* Allows horizontal scrolling on small screens */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: 10px;
+}
+
+.name-col {
+  text-align: center;
+}
+
+.cal-col {
+  text-align: center;
+}
+
+.nutrient-col {
+  text-align: end;
+}
+
+.category-col {
+  text-align: end;
 }
 
 table {
   width: 100%;
-  margin: 20px auto;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
 }
@@ -25,24 +47,22 @@ th {
   font-weight: bold;
 }
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: #f9f9f9;
-}
+} */
 
-/* Mobile responsiveness */
 @media only screen and (max-width: 600px) {
   th, td {
     font-size: 18px;
     padding: 10px;
   }
 
-  /* Stack table rows vertically on small screens */
   table {
     display: block;
   }
 
   thead {
-      display: none; /* Hide table headers on small screens */
+      display: none;
   }
 
   tbody, tr, td {
@@ -71,15 +91,46 @@ tr:nth-child(even) {
   }
 }
 
-/* Input container styling */
-.input-container {
+/* Search */
+.search-container {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+  flex-direction: column;
+  padding: 2px;
 }
 
 #search {
+  padding: 14px;
   width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: left;
+}
+
+/* Select */
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#selectLabel {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+#foodSelect {
   padding: 14px;
   font-size: 16px;
   border: 1px solid #ccc;
