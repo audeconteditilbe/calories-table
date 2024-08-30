@@ -1,31 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-}
-
-.input-container {
-  width: 50%;
-  margin: 20px auto;
-  text-align: center;
-}
-
-input[type="text"] {
-  padding: 8px;
-  width: 50%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+/* Basic table styling */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Allows horizontal scrolling on small screens */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  margin-top: 10px;
 }
 
 table {
-  width: 70%;
+  width: 100%;
   margin: 20px auto;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
 }
 
 th, td {
-  padding: 10px;
+  font-size: 18px;
+  padding: 12px;
   text-align: left;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
@@ -37,6 +29,60 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-tr:hover {
-  background-color: #f1f1f1;
+/* Mobile responsiveness */
+@media only screen and (max-width: 600px) {
+  th, td {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  /* Stack table rows vertically on small screens */
+  table {
+    display: block;
+  }
+
+  thead {
+      display: none; /* Hide table headers on small screens */
+  }
+
+  tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    margin-bottom: 10px;
+  }
+
+  td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+  }
+
+  td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      text-align: left;
+  }
+}
+
+/* Input container styling */
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+#search {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: left;
 }
