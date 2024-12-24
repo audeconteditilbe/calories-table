@@ -10,7 +10,7 @@ const exercises = [
     name: 'Bodyweight Squats',
     label: 'Squat',
     hints: [
-      '💡 Esegui la variante con o senza i manubri a seconda della difficoltà.'
+      'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
     images: [
       {
@@ -31,7 +31,7 @@ const exercises = [
     name: 'Dumbbell Glute Bridges',
     label: 'Ponte',
     hints: [
-      '💡 Se troppo difficile, rimuovi il manubrio.'
+      'Se troppo difficile, rimuovi il manubrio.'
     ],
     images: [
       {
@@ -48,9 +48,9 @@ const exercises = [
     name: 'Side Leg Raises',
     label: 'Alzata di gamba laterale',
     hints: [
-      '💡 Se troppo facile, appoggia un manubrio sulla gamba, tenendolo stabile con la mano.',
-      '💡 Non serve andare in alto come la tizia, quella è matta.',
-      '💡 Cerca di mantenere la gamba tesa, e abbassala lentamente.',
+      'Se troppo facile, appoggia un manubrio sulla gamba, tenendolo stabile con la mano.',
+      'Non serve andare in alto come la tizia, quella è matta.',
+      'Cerca di mantenere la gamba tesa, e abbassala lentamente.',
     ],
     images: [
       {
@@ -67,7 +67,7 @@ const exercises = [
     name: 'Seated Calf Raises',
     label: 'Alzata di polpaccio seduta',
     hints: [
-      '💡 Esegui la variante con o senza i manubri a seconda della difficoltà.'
+      'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
     images: [
       {
@@ -89,10 +89,10 @@ const exercises = [
     name: 'Dumbbell Bicep Curls',
     label: 'Curl',
     hints: [
-      '💡 Tieni i gomiti vicini al corpo. Se più comodo, ruota i polsi durante il movimento.'
+      'Tieni i gomiti vicini al corpo. Se più comodo, ruota i polsi durante il movimento.'
     ],
     warnings: [
-      '⚠️ Non inclinare la schiena indietro! Se non riesci, non fare l\'esercizio, o togli'
+      'Non inclinare la schiena indietro! Se non riesci, non fare l\'esercizio, o togli'
       + ' il peso'
     ],
     images: [
@@ -114,7 +114,7 @@ const exercises = [
     name: 'Dumbbell Shoulder Press',
     label: 'Spinte',
     hints: [
-      '💡 Cerca di abbassare i manubri lentamente.'
+      'Cerca di abbassare i manubri lentamente.'
     ],
     images: [
       {
@@ -131,7 +131,7 @@ const exercises = [
     name: 'Dumbbell Side Raises',
     label: 'Alzate laterali',
     hints: [
-      '💡 Se più comodo, mantieni le braccia leggermente piegate.'
+      'Se più comodo, mantieni le braccia leggermente piegate.'
     ],
     images: [
       {
@@ -148,7 +148,7 @@ const exercises = [
     name: 'Dumbbell Rear Delt Squeeze',
     label: 'Croci inverse',
     warnings: [
-      '⚠️ Tieni la schiena dritta! Se non riesci, non fare l\'esercizio, o togli il peso'
+      'Tieni la schiena dritta! Se non riesci, non fare l\'esercizio, o togli il peso'
     ],
     images: [
       {
@@ -166,7 +166,7 @@ const exercises = [
     name: 'Russian Twists',
     label: 'Twist russi',
     hints: [
-      '💡 Esegui la variante con o senza i manubri a seconda della difficoltà.'
+      'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
     images: [
       {
@@ -187,7 +187,7 @@ const exercises = [
     name: 'Plank Hold',
     label: 'Plank',
     hints: [
-      '💡 Tieni la schiena dritta!'
+      'Tieni la schiena dritta!'
     ],
     images: [
       {
@@ -204,7 +204,7 @@ const exercises = [
     name: 'Side Plank Hold',
     label: 'Plank laterale',
     hints: [
-      '💡 Posiziona un manubrio lungo la gamba per aumentare la difficoltà.'
+      'Posiziona un manubrio lungo la gamba per aumentare la difficoltà.'
     ],
     images: [
       {
@@ -221,8 +221,8 @@ const exercises = [
     name: 'Wall Sit',
     label: 'Sedia al muro',
     hints: [
-      '💡 Esegui la variante con o senza i manubri a seconda della difficoltà.',
-      '💡 Tieni le braccia come vuoi, specie nella variante senza manubri.',
+      'Esegui la variante con o senza i manubri a seconda della difficoltà.',
+      'Tieni le braccia come vuoi, specie nella variante senza manubri.',
     ],
     images: [
       {
@@ -316,28 +316,31 @@ const loadExercises = (inputDay) => {
       }
 
       // accordion with examples
-      const example_els = images.map(({ label, src }) => {
-        const name = document.createElement('span')
-        name.innerText = `${label}:`
+      const examples_el = document.createElement('div')
+      examples_el.classList.add('examples')
+      images.forEach(({ label, src }) => {
+        const container = document.createElement('div')
+        container.classList.add('example-img-container')
         
+        const name = document.createElement('span')
+        name.innerText = label
+        container.appendChild(name)
+
         const img = document.createElement('img')
         img.src = src
         img.alt = label
-        
-        const container = document.createElement('div')
-        container.classList.add('img-container')
-        container.appendChild(name)
         container.appendChild(img)
-        return container
+        
+        examples_el.appendChild(container)
       })
       
       const accordion = document.createElement('details')
-      accordion.classList.add('accordion')
+      accordion.classList.add('example-accordion')
       accordion.open = true
       const summary = document.createElement('summary')
       summary.innerText = 'Esempi'
       accordion.appendChild(summary)
-      example_els.forEach((example_el) => accordion.appendChild(example_el))
+      accordion.appendChild(examples_el)
       li.appendChild(accordion)
 
       list.appendChild(li)

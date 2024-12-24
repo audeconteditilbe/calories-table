@@ -4,10 +4,6 @@
   display: none;
 }
 
-summary {
-  cursor: pointer;
-}
-
 /* Title */
 
 .title {
@@ -28,16 +24,13 @@ summary {
   margin-bottom: 20px;
 }
 
-.disclaimer > summary {
-  width: 150px;
-}
-
 /* Tabs */
 
 .tabs {
   display: flex;
   justify-content: center;
   gap: 30px;
+  height: 30px;
 }
 
 .tab {
@@ -62,6 +55,7 @@ summary {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-left: 0;
 }
 
 .exercise-item {
@@ -83,13 +77,24 @@ summary {
 }
 
 .hint-list {
-  list-style-type: disc;
+  list-style-type: none;
 }
 
-.hint {}
+.hint {
+  font-style: italic;
+  color: #727272;
+}
+
+.hint::marker {
+  content: '💡';
+  font-style: normal;
+}
 
 .warning {
   color: #f25522;
+}
+.warning::marker {
+  content: '⚠️'
 }
 
 .sets {}
@@ -100,15 +105,21 @@ summary {
 
 .rest {}
 
-.img-container {
+.examples {
   display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-  img {
-    width: 300px;
-  }
+  gap: 20px;
 }
 
-.accordion > summary {
-  width: 80px;
+.example-img-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #828282;
+
+  span {
+    font-style: italic;
+    /* font-size: 1.5rem; */
+  }
+  img {
+    width: 20rem;
+  }
 }
