@@ -1,13 +1,13 @@
-* {
-  background-color: #f2f2f2;
-}
-
-
 .title {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+}
+
+.title > a {
+  text-decoration: none;
 }
 
 /* Table */

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Giulia è smilza</title>
+  <link rel="stylesheet" type="text/css" href="base.css">
+  <link rel="stylesheet" type="text/css" href="calories-table.css">
+</head>
+
+<body>
+  <header class="title">
+    <a href="./index.html">⬅️</a>
+    <h1>Operazione obesità</h1>
+  </header>
+  
+  <!-- <div class="form-container">
+    
+    <div class="form-field">
+      <label id="selectLabel" for="food">Che hai mangiato oggi?</label>    
+      <select id="foodSelect" name="food">
+        <option class="food-select-option" value="">-</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label id="quantityLabel" for="quantity">Quanto?</label>    
+      <input type="text" id="quantity"></input>
+      <p id="unity"></p>
+    </div>
+
+    <div id="foodListRoot"></div>
+  </div> -->
+    
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Cerca...">
+  </div>
+
+  <div class="table-container">
+    <table id="foodTable">
+      <tr>
+        <th class="name-col">Cibo</th>
+        <th class="cal-col">KCal</th>
+        <th class="nutrient-col">Nutrienti</th>
+        <th class="category-col">Categoria</th>
+      </tr>
+    </table>
+  </div>
+
+  <script src="load-foods.js"></script>
+  <script src="search-foods.js"></script>
+</body>
+
+</html>
