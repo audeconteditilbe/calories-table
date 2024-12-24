@@ -1,0 +1,64 @@
+* {
+  background-color: #f2f2f2;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#exerciseList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exercise-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  margin-bottom: 0px;
+}
+
+.hints-container {}
+
+.hint-list-title {
+  margin-bottom: 0px;
+}
+
+.hint-list {
+  list-style-type: disc;
+}
+
+.hint {
+  color: #929292;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+.warning {
+  color: #f25522;
+  margin-top: 3px;
+}
+
+.sets {}
+
+.reps {}
+
+.hold {}
+
+.rest {}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  img {
+    width: 300px;
+  }
+}

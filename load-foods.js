@@ -73,7 +73,7 @@ const data = [
     "category": FIRST_COURSES
   },
   {
-    "name": "Minesta",
+    "name": "Minestra",
     "calories": 200,
     "unit": "A piatto pieno",
     "nutrient": CARBOHYDRATES,
@@ -353,7 +353,7 @@ const data = [
     "category": COLD_CUTS_AND_BREAD
   },
   {
-    "name": "Philadeplhia",
+    "name": "Philadelphia",
     "calories": 220,
     "unit": "A porzione mini (quella che compriamo di solito)",
     "nutrient": "Grassi, proteine",
