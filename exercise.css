@@ -1,6 +1,19 @@
+/* Global */
+
 * {
   background-color: #f2f2f2;
+  color: #333;
 }
+
+.hidden {
+  display: none;
+}
+
+summary {
+  cursor: pointer;
+}
+
+/* Title */
 
 .title {
   width: 100%;
@@ -8,6 +21,42 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Introduction message */
+
+.disclaimer {
+  margin-bottom: 20px;
+}
+
+.disclaimer > summary {
+  width: 150px;
+}
+
+/* Tabs */
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.tab {
+  cursor: pointer;
+}
+
+.tab:hover {
+  text-decoration: underline;
+}
+
+.selected {
+  text-decoration: underline;
+}
+
+.vl {
+  border: 1px solid #333;
+}
+
+/* List */
 
 #exerciseList {
   display: flex;
@@ -18,32 +67,29 @@
 .exercise-item {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .label {
   margin-bottom: 0px;
 }
 
-.hints-container {}
+.hints-container {
+  margin-bottom: 5px;
+}
 
 .hint-list-title {
-  margin-bottom: 0px;
+  font-weight: 600;
 }
 
 .hint-list {
   list-style-type: disc;
 }
 
-.hint {
-  color: #929292;
-  margin-top: 3px;
-  font-style: italic;
-}
+.hint {}
 
 .warning {
   color: #f25522;
-  margin-top: 3px;
 }
 
 .sets {}
@@ -61,4 +107,8 @@
   img {
     width: 300px;
   }
+}
+
+.accordion > summary {
+  width: 80px;
 }
