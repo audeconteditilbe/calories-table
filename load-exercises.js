@@ -336,7 +336,7 @@ const loadExercises = (inputDay) => {
       
       const accordion = document.createElement('details')
       accordion.classList.add('example-accordion')
-      // accordion.open = true
+      accordion.open = true
       const summary = document.createElement('summary')
       summary.innerText = 'Esempi'
       accordion.appendChild(summary)
