@@ -1,9 +1,18 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Title */
+
 .title {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 0.5rem;
 }
 
 .title > a {
@@ -11,38 +20,32 @@
 }
 
 /* Table */
+
 .table-container {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-top: 10px;
 }
 
-.name-col {
-  text-align: center;
-}
-
+.name-col,
 .cal-col {
   text-align: center;
 }
 
-.nutrient-col {
-  text-align: end;
-}
-
+.nutrient-col,
 .category-col {
   text-align: end;
 }
 
 table {
+  overflow-x: auto;
   width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
 }
 
 th, td {
   font-size: 18px;
-  padding: 12px;
+  padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -52,92 +55,20 @@ th {
   font-weight: bold;
 }
 
-/* tr:nth-child(even) {
-  background-color: #f9f9f9;
-} */
-
-@media only screen and (max-width: 600px) {
-  th, td {
-    font-size: 18px;
-    padding: 10px;
-  }
-
-  table {
-    display: block;
-  }
-
-  thead {
-      display: none;
-  }
-
-  tbody, tr, td {
-    display: block;
-    width: 100%;
-  }
-
-  tr {
-    margin-bottom: 10px;
-  }
-
-  td {
-      text-align: right;
-      padding-left: 50%;
-      position: relative;
-  }
-
-  td::before {
-      content: attr(data-label);
-      position: absolute;
-      left: 10px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      text-align: left;
-  }
-}
 
 /* Search */
+
 .search-container {
+  width: 100%;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
   flex-direction: column;
-  padding: 2px;
 }
 
 #search {
-  padding: 14px;
   width: 100%;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: left;
-}
-
-/* Select */
-.form-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#selectLabel {
-  font-weight: 500;
-  font-size: 18px;
-}
-
-#foodSelect {
-  padding: 14px;
-  font-size: 16px;
+  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: left;
