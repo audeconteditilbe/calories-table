@@ -165,7 +165,21 @@ const data = [
   },
   {
     "name": "Patate arrosto",
-    "calories": 100,
+    "calories": 80,
+    "unit": "A porzione",
+    "nutrient": CARBOHYDRATES,
+    "category": SIDE_DISHES
+  },
+  {
+    "name": "Patate lesse",
+    "calories": 50,
+    "unit": "A porzione",
+    "nutrient": CARBOHYDRATES,
+    "category": SIDE_DISHES
+  },
+  {
+    "name": "Purea",
+    "calories": 80,
     "unit": "A porzione",
     "nutrient": CARBOHYDRATES,
     "category": SIDE_DISHES
@@ -175,13 +189,6 @@ const data = [
     "calories": 3,
     "unit": "L'una",
     "nutrient": FATS,
-    "category": SIDE_DISHES
-  },
-  {
-    "name": "Patate lesse",
-    "calories": 50,
-    "unit": "A porzione",
-    "nutrient": CARBOHYDRATES,
     "category": SIDE_DISHES
   },
   {
@@ -558,7 +565,7 @@ const categoryOrder = [
 ]
 
 // Fill table
-const table = document.querySelector('#foodTable');
+const table = document.querySelector('#foodTable')
 data
   .sort((a, b) => {
     const catA = categoryOrder.indexOf(a.category)
@@ -596,4 +603,3 @@ data
     
     table.appendChild(tr)
   })
-

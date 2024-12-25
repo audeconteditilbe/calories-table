@@ -6,7 +6,7 @@
 }
 
 body {
-  padding: 3rem;
+  padding: 2rem;
   min-height: 100vh;
   color: #333;
   background: #f2f2f2;
@@ -67,18 +67,8 @@ details[open] summary {
   margin-bottom: 0.5em;
 }
 
-/* CUSTOM CLASSES */
+/* SHARED CLASSES */
 
 .nowrap {
   white-space: nowrap;
-}
-
-.ellipsable {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.hidden {
-  display: none;
 }

@@ -89,7 +89,8 @@ const exercises = [
     name: 'Dumbbell Bicep Curls',
     label: 'Curl',
     hints: [
-      'Tieni i gomiti vicini al corpo. Se più comodo, ruota i polsi durante il movimento.'
+      'Tieni i gomiti vicini al corpo.',
+      'Se più comodo, ruota i polsi durante il movimento.'
     ],
     warnings: [
       'Non inclinare la schiena indietro! Se non riesci, non fare l\'esercizio, o togli'
@@ -240,7 +241,6 @@ const exercises = [
   },
 ]
 
-
 // Fill list
 
 const loadExercises = (inputDay) => {
@@ -322,14 +322,14 @@ const loadExercises = (inputDay) => {
         const container = document.createElement('div')
         container.classList.add('example-img-container')
         
-        const name = document.createElement('span')
-        name.innerText = label
-        container.appendChild(name)
-
         const img = document.createElement('img')
         img.src = src
         img.alt = label
         container.appendChild(img)
+        
+        const name = document.createElement('span')
+        name.innerText = label
+        container.appendChild(name)
         
         examples_el.appendChild(container)
       })

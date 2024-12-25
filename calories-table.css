@@ -29,12 +29,12 @@ body {
 
 .name-col,
 .cal-col {
-  text-align: center;
+  text-align: start;
 }
 
 .nutrient-col,
 .category-col {
-  text-align: end;
+  text-align: start;
 }
 
 table {
@@ -44,7 +44,6 @@ table {
 }
 
 th, td {
-  font-size: 18px;
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -55,6 +54,41 @@ th {
   font-weight: bold;
 }
 
+
+@media (min-width: 768px) {
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .name-col,
+  .cal-col {
+    text-align: center;
+  }
+  
+  .nutrient-col,
+  .category-col {
+    text-align: end;
+  }
+  
+  table {
+    overflow-x: auto;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+}
 
 /* Search */
 
