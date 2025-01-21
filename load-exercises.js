@@ -1,7 +1,5 @@
-const BASE_REST = {
-  exercise: '30-60',
-  sets: '45-90'
-}
+const SHORT_REST = '45'
+const LONG_REST = '60'
 
 const exercises = [
   // day A
@@ -22,9 +20,10 @@ const exercises = [
         src: './assets/squat-w-dumbbell.gif'
       },
     ],
-    rest: BASE_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    sets: 3,
     reps: '10',
+    weight: null,
   },
   {
     day: 'a',
@@ -39,9 +38,10 @@ const exercises = [
         src: './assets/glutes-bridge.gif'
       }
     ],
-    rest: BASE_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    sets: 3,
     reps: '10',
+    weight: '2kg'
   },
   {
     day: 'a',
@@ -58,9 +58,10 @@ const exercises = [
         src: './assets/side-leg-raise.gif'
       }
     ],
-    rest: BASE_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    sets: 3,
     reps: '8 per gamba',
+    weight: null,
   },
   {
     day: 'a',
@@ -79,9 +80,10 @@ const exercises = [
         src: './assets/calf-raises-w-dumbbell.jpg'
       }
     ],
-    rest: BASE_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    sets: 3,
     reps: '10 per gamba',
+    weight: '2kg per gamba',
   },
   // day B
   {
@@ -106,9 +108,10 @@ const exercises = [
         src: './assets/curl-2.gif'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
-    reps: '10',
+    reps: '8',
+    weight: '2kg',
   },
   {
     day: 'b',
@@ -123,9 +126,10 @@ const exercises = [
         src: './assets/shoulder-press.gif'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
-    reps: '8-10',
+    reps: '8',
+    weight: '1kg o senza',
   },
   {
     day: 'b',
@@ -140,9 +144,10 @@ const exercises = [
         src: './assets/side-raises.gif'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
     reps: '8',
+    weight: '1kg o senza',
   },
   {
     day: 'b',
@@ -157,9 +162,10 @@ const exercises = [
         src: './assets/rear-deltoid-lift.gif'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
     reps: '8',
+    weight: '1kg o 2kg',
   },
   // day C
   {
@@ -179,9 +185,10 @@ const exercises = [
         src: './assets/russian-twist-w-dumbbell.gif'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
     reps: '10 twist (5 per lato)',
+    weight: null,
   },
   {
     day: 'c',
@@ -196,9 +203,10 @@ const exercises = [
         src: './assets/plank.jpg'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
-    hold: '20-45 secondi',
+    hold: '30 secondi',
+    weight: null,
   },
   {
     day: 'c',
@@ -213,9 +221,10 @@ const exercises = [
         src: './assets/side-plank.jpg'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
-    hold: '20-45 secondi per lato',
+    hold: '30 secondi per lato',
+    weight: null,
   },
   {
     day: 'c',
@@ -235,9 +244,10 @@ const exercises = [
         src: './assets/wall-sit-w-dumbbell.jpg'
       }
     ],
-    rest: BASE_REST,
+    rest: LONG_REST,
     sets: 2,
-    hold: '15 secondi',
+    hold: '20 secondi',
+    weight: null,
   },
 ]
 
@@ -247,7 +257,7 @@ const loadExercises = (inputDay) => {
   exercises
     .filter(({day}) => day === inputDay)
     .forEach(({
-      hints, warnings, images, label, rest, sets, reps, hold
+      hints, warnings, images, label, rest, sets, reps, hold, weight
     }, idx) => {
       const li = document.createElement('li')
       li.classList.add('exercise-item')
@@ -281,8 +291,16 @@ const loadExercises = (inputDay) => {
       // rest time
       const rest_el = document.createElement('span')
       rest_el.classList.add('rest')
-      rest_el.innerText = `Riposa per ${rest.sets} secondi fra un set e l'altro`
+      rest_el.innerText = `Riposa per ${rest} secondi fra un set e l'altro`
       li.appendChild(rest_el)
+
+      // weight
+      if (weight) {
+        const weight_el = document.createElement('span')
+        weight_el.classList.add('weight')
+        weight_el.innerText = `Peso suggerito: ${weight}`
+        li.appendChild(weight_el)
+      }
       
       // hints and caution messages
       if ((hints && hints.length > 0) || (warnings && warnings.length > 0)) {
