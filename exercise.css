@@ -62,36 +62,39 @@ body {
 .exercise-item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border: 1px solid #e3e3e3;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 3px 3px 13px #333;
+  gap: 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 3px 3px 13px #888;
 }
 
 .label {
   margin-bottom: 0px;
 }
 
-.hints-container {
+.message-container {
   margin-bottom: 5px;
 }
 
-.hint-list-title {
+.message-list-title {
   font-weight: 600;
 }
 
-.hint-list {
+.message-list {
   list-style-type: none;
+}
+
+.instruction {}
+.instruction::marker {
+  content: 'ℹ️ ';
 }
 
 .hint {
   font-style: italic;
   color: #727272;
 }
-
 .hint::marker {
-  content: '💡';
+  content: '💡 ';
   font-style: normal;
 }
 
@@ -99,7 +102,7 @@ body {
   color: #f25522;
 }
 .warning::marker {
-  content: '⚠️'
+  content: '⚠️ '
 }
 
 .sets {}
@@ -112,11 +115,15 @@ body {
 
 .rest {}
 
+.example-accordion {
+  
+}
+
 .examples {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -128,8 +135,10 @@ body {
 .example-img-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid #d2d2d2;
+  border-radius: 1rem;
+  padding: 0.5rem;
   justify-content: center;
+  background: #fff;
   span {
     font-style: italic;
     /* font-size: 1.5rem; */

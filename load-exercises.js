@@ -10,6 +10,8 @@ const exercises = [
     hints: [
       'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
+    instructions: [],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -29,9 +31,11 @@ const exercises = [
     day: 'a',
     name: 'Dumbbell Glute Bridges',
     label: 'Ponte',
+    instructions: [],
     hints: [
       'Se troppo difficile, rimuovi il manubrio.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -41,17 +45,22 @@ const exercises = [
     rest: SHORT_REST,
     sets: 3,
     reps: '10',
-    weight: '2kg'
+    weight: '5kg'
   },
   {
     day: 'a',
     name: 'Side Leg Raises',
     label: 'Alzata di gamba laterale',
+    instructions: [
+      'Cerca di mantenere la gamba tesa, e abbassala lentamente.',
+      'Una singola ripetizione è composta da una serie su entrambe le gambe!',
+      'Non serve fare una pausa fra una gamba e l\'altra. Quindi: 8 gamba destra + 8 gamba sinistra, pausa, 8+8, pausa, 8+8.',
+    ],
     hints: [
       'Se troppo facile, appoggia un manubrio sulla gamba, tenendolo stabile con la mano.',
       'Non serve andare in alto come la tizia, quella è matta.',
-      'Cerca di mantenere la gamba tesa, e abbassala lentamente.',
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -60,16 +69,18 @@ const exercises = [
     ],
     rest: SHORT_REST,
     sets: 3,
-    reps: '8 per gamba',
+    reps: '8 per gamba (gamba destra + gamba sinistra contano come un solo set!)',
     weight: null,
   },
   {
     day: 'a',
     name: 'Seated Calf Raises',
     label: 'Alzata di polpaccio seduta',
+    instructions: [],
     hints: [
       'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -90,8 +101,10 @@ const exercises = [
     day: 'b',
     name: 'Dumbbell Bicep Curls',
     label: 'Curl',
-    hints: [
+    instructions: [
       'Tieni i gomiti vicini al corpo.',
+    ],
+    hints: [
       'Se più comodo, ruota i polsi durante il movimento.'
     ],
     warnings: [
@@ -117,9 +130,12 @@ const exercises = [
     day: 'b',
     name: 'Dumbbell Shoulder Press',
     label: 'Spinte',
+    instructions: [
+    ],
     hints: [
       'Cerca di abbassare i manubri lentamente.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -135,9 +151,11 @@ const exercises = [
     day: 'b',
     name: 'Dumbbell Side Raises',
     label: 'Alzate laterali',
+    instructions: [],
     hints: [
       'Se più comodo, mantieni le braccia leggermente piegate.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -153,6 +171,7 @@ const exercises = [
     day: 'b',
     name: 'Dumbbell Rear Delt Squeeze',
     label: 'Croci inverse',
+    instructions: [],
     warnings: [
       'Tieni la schiena dritta! Se non riesci, non fare l\'esercizio, o togli il peso'
     ],
@@ -172,9 +191,11 @@ const exercises = [
     day: 'c',
     name: 'Russian Twists',
     label: 'Twist russi',
+    instructions: [],
     hints: [
       'Esegui la variante con o senza i manubri a seconda della difficoltà.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -185,18 +206,20 @@ const exercises = [
         src: './assets/russian-twist-w-dumbbell.gif'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    reps: '10 twist (5 per lato)',
+    rest: SHORT_REST,
+    sets: 3,
+    reps: '14 twist (7 per lato)',
     weight: null,
   },
   {
     day: 'c',
     name: 'Plank Hold',
     label: 'Plank',
+    instructions: [],
     hints: [
       'Tieni la schiena dritta!'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -205,16 +228,18 @@ const exercises = [
     ],
     rest: LONG_REST,
     sets: 2,
-    hold: '30 secondi',
+    hold: '60 secondi',
     weight: null,
   },
   {
     day: 'c',
     name: 'Side Plank Hold',
     label: 'Plank laterale',
+    instructions: [],
     hints: [
       'Posiziona un manubrio lungo la gamba per aumentare la difficoltà.'
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -223,17 +248,19 @@ const exercises = [
     ],
     rest: LONG_REST,
     sets: 2,
-    hold: '30 secondi per lato',
+    hold: '45 secondi per lato',
     weight: null,
   },
   {
     day: 'c',
     name: 'Wall Sit',
     label: 'Sedia al muro',
+    instructions: [],
     hints: [
       'Esegui la variante con o senza i manubri a seconda della difficoltà.',
       'Tieni le braccia come vuoi, specie nella variante senza manubri.',
     ],
+    warnings: [],
     images: [
       {
         label: 'Base',
@@ -245,8 +272,8 @@ const exercises = [
       }
     ],
     rest: LONG_REST,
-    sets: 2,
-    hold: '20 secondi',
+    sets: 3,
+    hold: '60 secondi',
     weight: null,
   },
 ]
@@ -255,17 +282,17 @@ const exercises = [
 
 const loadExercises = (inputDay) => {
   exercises
-    .filter(({day}) => day === inputDay)
+    .filter(({ day }) => day === inputDay)
     .forEach(({
-      hints, warnings, images, label, rest, sets, reps, hold, weight
+      instructions, hints, warnings, images, label, rest, sets, reps, hold, weight
     }, idx) => {
       const li = document.createElement('li')
       li.classList.add('exercise-item')
-      
+
       // exercise title
       const label_el = document.createElement('h3')
       label_el.classList.add('label')
-      label_el.innerText = `${idx+1}. ${label}`
+      label_el.innerText = `${idx + 1}. ${label}`
       li.appendChild(label_el)
 
       // number of repetitions / time of hold
@@ -287,7 +314,7 @@ const loadExercises = (inputDay) => {
       sets_el.classList.add('sets')
       sets_el.innerText = `Set: ${sets}`
       li.appendChild(sets_el)
-      
+
       // rest time
       const rest_el = document.createElement('span')
       rest_el.classList.add('rest')
@@ -301,36 +328,53 @@ const loadExercises = (inputDay) => {
         weight_el.innerText = `Peso suggerito: ${weight}`
         li.appendChild(weight_el)
       }
-      
+
       // hints and caution messages
-      if ((hints && hints.length > 0) || (warnings && warnings.length > 0)) {
-        const hints_container = document.createElement('div')
-        hints_container.classList.add('hints-container')
+      if (
+        (instructions && instructions.length > 0)
+        || (hints && hints.length > 0)
+        || (warnings && warnings.length > 0)
+      ) {
+        const messages_container = document.createElement('div')
+        messages_container.classList.add('message-container')
 
-        const hints_title_el = document.createElement('span')
-        hints_title_el.classList.add('hint-list-title')
-        hints_title_el.innerText = 'Note:'
-        hints_container.appendChild(hints_title_el)
+        const messages_title_el = document.createElement('span')
+        messages_title_el.classList.add('message-list-title')
+        messages_title_el.innerText = 'Note:'
+        messages_container.appendChild(messages_title_el)
 
-        const hints_list_el = document.createElement('ul')
-        hints_list_el.classList.add('hint-list')
-        hints_container.appendChild(hints_list_el)
-        
+        const messages_ul = document.createElement('ul')
+        messages_ul.classList.add('message-list')
+        messages_container.appendChild(messages_ul)
+
         warnings?.forEach((warning) => {
           const warning_el = document.createElement('li')
           warning_el.classList.add('warning')
           warning_el.innerText = warning
-          hints_list_el.appendChild(warning_el)
+          messages_ul.appendChild(warning_el)
         })
+        if (warnings.length > 0) {
+          messages_ul.appendChild(document.createElement('br'))
+        }
+        instructions?.forEach((instruction) => {
+          const instruction_el = document.createElement('li')
+          instruction_el.classList.add('instruction')
+          instruction_el.innerText = instruction
+          messages_ul.appendChild(instruction_el)
+        })
+
+        if (instructions.length > 0) {
+          messages_ul.appendChild(document.createElement('br'))
+        }
 
         hints?.forEach((hint) => {
           const hint_el = document.createElement('li')
           hint_el.classList.add('hint')
           hint_el.innerText = hint
-          hints_list_el.appendChild(hint_el)
+          messages_ul.appendChild(hint_el)
         })
 
-        li.appendChild(hints_container)
+        li.appendChild(messages_container)
       }
 
       // accordion with examples
@@ -339,19 +383,19 @@ const loadExercises = (inputDay) => {
       images.forEach(({ label, src }) => {
         const container = document.createElement('div')
         container.classList.add('example-img-container')
-        
+
+        const name = document.createElement('span')
+        name.innerText = `${label}:`
+        container.appendChild(name)
+
         const img = document.createElement('img')
         img.src = src
         img.alt = label
         container.appendChild(img)
-        
-        const name = document.createElement('span')
-        name.innerText = label
-        container.appendChild(name)
-        
+
         examples_el.appendChild(container)
       })
-      
+
       const accordion = document.createElement('details')
       accordion.classList.add('example-accordion')
       accordion.open = true
