@@ -384,26 +384,22 @@ const loadExercises = (inputDay) => {
         const container = document.createElement('div')
         container.classList.add('example-img-container')
 
-        const name = document.createElement('span')
-        name.innerText = `${label}:`
-        container.appendChild(name)
-
         const img = document.createElement('img')
         img.src = src
         img.alt = label
         container.appendChild(img)
 
-        examples_el.appendChild(container)
+        const accordion = document.createElement('details')
+        accordion.classList.add('example-accordion')
+        accordion.open = true
+        const summary = document.createElement('summary')
+        summary.innerText = label
+        accordion.appendChild(summary)
+        accordion.appendChild(container)
+        examples_el.appendChild(accordion)
       })
 
-      const accordion = document.createElement('details')
-      accordion.classList.add('example-accordion')
-      accordion.open = true
-      const summary = document.createElement('summary')
-      summary.innerText = 'Esempi'
-      accordion.appendChild(summary)
-      accordion.appendChild(examples_el)
-      li.appendChild(accordion)
+      li.appendChild(examples_el)
 
       list.appendChild(li)
     })

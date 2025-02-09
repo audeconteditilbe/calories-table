@@ -115,10 +115,6 @@ body {
 
 .rest {}
 
-.example-accordion {
-  
-}
-
 .examples {
   display: flex;
   justify-content: space-evenly;
@@ -132,13 +128,16 @@ body {
   }
 }
 
+.example-accordion {
+  border: 1px solid #ddd;
+}
+
 .example-img-container {
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
   padding: 0.5rem;
   justify-content: center;
-  background: #fff;
   span {
     font-style: italic;
     /* font-size: 1.5rem; */
