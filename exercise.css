@@ -15,7 +15,7 @@ body {
   gap: 0.5rem;
 }
 
-.title > a {
+.title>a {
   text-decoration: none;
 }
 
@@ -85,6 +85,7 @@ body {
 }
 
 .instruction {}
+
 .instruction::marker {
   content: 'ℹ️ ';
 }
@@ -93,6 +94,7 @@ body {
   font-style: italic;
   color: #727272;
 }
+
 .hint::marker {
   content: '💡 ';
   font-style: normal;
@@ -101,6 +103,7 @@ body {
 .warning {
   color: #f25522;
 }
+
 .warning::marker {
   content: '⚠️ '
 }
@@ -128,9 +131,7 @@ body {
   }
 }
 
-.example-accordion {
-  border: 1px solid #ddd;
-}
+.example-accordion {}
 
 .example-img-container {
   display: flex;
@@ -138,10 +139,12 @@ body {
   border-radius: 1rem;
   padding: 0.5rem;
   justify-content: center;
+
   span {
     font-style: italic;
     /* font-size: 1.5rem; */
   }
+
   img {
     max-width: 20rem;
   }

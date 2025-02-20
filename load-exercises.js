@@ -272,7 +272,7 @@ const exercises = [
       }
     ],
     rest: LONG_REST,
-    sets: 3,
+    sets: 2,
     hold: '60 secondi',
     weight: null,
   },

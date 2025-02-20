@@ -44,11 +44,6 @@ body {
 
 /* ACCORDION */
 
-details {
-  border-radius: 4px;
-  pdding: 0.5em 0.5em 0;
-}
-
 summary {
   font-weight: bold;
   margin: -0.5em -0.5em 0;
@@ -59,6 +54,7 @@ summary {
 
 details[open] {
   padding: 0.5em;
+  border: 1px solid #ddd;
 }
 
 details[open] summary {
