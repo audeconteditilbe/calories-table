@@ -93,7 +93,7 @@ const exercises = [
     ],
     rest: SHORT_REST,
     sets: 3,
-    reps: '10 per gamba',
+    reps: '10',
     weight: '2kg per gamba',
   },
   // day B
