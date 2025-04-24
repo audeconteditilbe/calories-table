@@ -1,5 +1,7 @@
 const SHORT_REST = '45'
-const LONG_REST = '60'
+
+const SHORT_SET = 2
+const LONG_SET = 3
 
 const exercises = [
   // day A
@@ -19,13 +21,13 @@ const exercises = [
       },
       {
         label: 'Con manubri',
-        src: './assets/squat-w-dumbbell.gif'
+        src: './assets/squat-w-barbell.gif'
       },
     ],
     rest: SHORT_REST,
-    sets: 3,
+    sets: LONG_SET,
     reps: '10',
-    weight: null,
+    weight: 'Bilanciere',
   },
   {
     day: 'a',
@@ -43,9 +45,9 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    sets: 3,
+    sets: LONG_SET,
     reps: '10',
-    weight: '5kg'
+    weight: '10kg'
   },
   {
     day: 'a',
@@ -68,8 +70,8 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    sets: 3,
-    reps: '8 per gamba (gamba destra + gamba sinistra contano come un solo set!)',
+    sets: LONG_SET,
+    reps: '10 per gamba (gamba destra + gamba sinistra contano come un solo set!)',
     weight: null,
   },
   {
@@ -84,17 +86,17 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/calf-raises.jpg'
+        src: './assets/calf-raises.gif'
       },
       {
-        label: 'Con manubrio',
-        src: './assets/calf-raises-w-dumbbell.jpg'
+        label: 'Con bilancere',
+        src: './assets/calf-raises-w-dumbbell.gif'
       }
     ],
     rest: SHORT_REST,
-    sets: 3,
+    sets: LONG_SET,
     reps: '10',
-    weight: '2kg per gamba',
+    weight: '2kg per mano'
   },
   // day B
   {
@@ -121,9 +123,9 @@ const exercises = [
         src: './assets/curl-2.gif'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    reps: '8',
+    rest: SHORT_REST,
+    sets: LONG_SET,
+    reps: '10',
     weight: '2kg',
   },
   {
@@ -142,19 +144,19 @@ const exercises = [
         src: './assets/shoulder-press.gif'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    reps: '8',
-    weight: '1kg o senza',
+    rest: SHORT_REST,
+    sets: LONG_SET,
+    reps: '10',
+    weight: 'Bilanciere',
   },
   {
     day: 'b',
     name: 'Dumbbell Side Raises',
     label: 'Alzate laterali',
-    instructions: [],
-    hints: [
-      'Se più comodo, mantieni le braccia leggermente piegate.'
+    instructions: [
+      'Mantieni le braccia leggermente piegate.'
     ],
+    hints: [],
     warnings: [],
     images: [
       {
@@ -162,9 +164,9 @@ const exercises = [
         src: './assets/side-raises.gif'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    reps: '8',
+    rest: SHORT_REST,
+    set: SHORT_SET,
+    reps: '10',
     weight: '1kg o senza',
   },
   {
@@ -181,10 +183,10 @@ const exercises = [
         src: './assets/rear-deltoid-lift.gif'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    reps: '8',
-    weight: '1kg o 2kg',
+    rest: SHORT_REST,
+    set: SHORT_SET,
+    reps: '5',
+    weight: '2kg',
   },
   // day C
   {
@@ -207,9 +209,9 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    sets: 3,
-    reps: '14 twist (7 per lato)',
-    weight: null,
+    sets: LONG_SET,
+    reps: '20 twist (10 per lato)',
+    weight: '2kg (senza manubrio: solo il disco o i due pesetti insieme)',
   },
   {
     day: 'c',
@@ -226,8 +228,8 @@ const exercises = [
         src: './assets/plank.jpg'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    set: SHORT_SET,
     hold: '60 secondi',
     weight: null,
   },
@@ -246,8 +248,8 @@ const exercises = [
         src: './assets/side-plank.jpg'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
+    rest: SHORT_REST,
+    set: SHORT_SET,
     hold: '45 secondi per lato',
     weight: null,
   },
@@ -271,10 +273,10 @@ const exercises = [
         src: './assets/wall-sit-w-dumbbell.jpg'
       }
     ],
-    rest: LONG_REST,
-    sets: 2,
-    hold: '60 secondi',
-    weight: null,
+    rest: SHORT_REST,
+    set: SHORT_SET,
+    hold: '45 secondi',
+    weight: '2kg per mano',
   },
 ]
 
