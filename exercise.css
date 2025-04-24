@@ -68,45 +68,61 @@ body {
   box-shadow: 3px 3px 13px #888;
 }
 
-.label {
-  margin-bottom: 0px;
+.exercise-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .label {
+    margin-bottom: 0px;
+  }
+
+  .close-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+  }
 }
+
 
 .message-container {
   margin-bottom: 5px;
+
+  .message-list-title {
+    font-weight: 600;
+  }
+
+  .message-list {
+    list-style-type: none;
+  }
+
+  .instruction {}
+
+  .instruction::marker {
+    content: 'ℹ️ ';
+  }
+
+  .hint {
+    font-style: italic;
+    color: #727272;
+  }
+
+  .hint::marker {
+    content: '💡 ';
+    font-style: normal;
+  }
+
+  .warning {
+    color: #f25522;
+  }
+
+  .warning::marker {
+    content: '⚠️ '
+  }
 }
 
-.message-list-title {
-  font-weight: 600;
-}
-
-.message-list {
-  list-style-type: none;
-}
-
-.instruction {}
-
-.instruction::marker {
-  content: 'ℹ️ ';
-}
-
-.hint {
-  font-style: italic;
-  color: #727272;
-}
-
-.hint::marker {
-  content: '💡 ';
-  font-style: normal;
-}
-
-.warning {
-  color: #f25522;
-}
-
-.warning::marker {
-  content: '⚠️ '
-}
 
 .sets {}
 
@@ -123,29 +139,29 @@ body {
   justify-content: space-evenly;
   flex-direction: column;
   gap: 2rem;
+
+  .example-accordion {}
+
+  .example-img-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    justify-content: center;
+
+    span {
+      font-style: italic;
+      /* font-size: 1.5rem; */
+    }
+
+    img {
+      max-width: 20rem;
+    }
+  }
 }
 
 @media (min-width: 768px) {
   .examples {
     flex-direction: row;
-  }
-}
-
-.example-accordion {}
-
-.example-img-container {
-  display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  justify-content: center;
-
-  span {
-    font-style: italic;
-    /* font-size: 1.5rem; */
-  }
-
-  img {
-    max-width: 20rem;
   }
 }

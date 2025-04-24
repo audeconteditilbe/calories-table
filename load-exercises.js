@@ -280,6 +280,100 @@ const exercises = [
 
 // Fill list
 
+const makeExerciseTitle = (idx, label, onToggle) => {
+  const label_el = document.createElement('h3')
+  label_el.classList.add('label')
+  label_el.innerText = `${idx + 1}. ${label}`
+
+  const close_btn = document.createElement('button')
+  close_btn.classList.add('close-btn')
+  close_btn.innerText = '+'
+  close_btn.addEventListener('click', onToggle)
+
+  const div = document.createElement('div')
+  div.classList.add('exercise-title')
+  div.appendChild(label_el)
+  div.appendChild(close_btn)
+
+  return div
+}
+
+const makeHints = (instructions, hints, warnings) => {
+  const list = []
+  if (
+    (instructions && instructions.length > 0)
+    || (hints && hints.length > 0)
+    || (warnings && warnings.length > 0)
+  ) {
+    const messages_container = document.createElement('div')
+    messages_container.classList.add('message-container')
+
+    const messages_title_el = document.createElement('span')
+    messages_title_el.classList.add('message-list-title')
+    messages_title_el.innerText = 'Note:'
+    messages_container.appendChild(messages_title_el)
+
+    const messages_ul = document.createElement('ul')
+    messages_ul.classList.add('message-list')
+    messages_container.appendChild(messages_ul)
+
+    warnings?.forEach((warning) => {
+      const warning_el = document.createElement('li')
+      warning_el.classList.add('warning')
+      warning_el.innerText = warning
+      messages_ul.appendChild(warning_el)
+    })
+    if (warnings.length > 0) {
+      messages_ul.appendChild(document.createElement('br'))
+    }
+
+    instructions?.forEach((instruction) => {
+      const instruction_el = document.createElement('li')
+      instruction_el.classList.add('instruction')
+      instruction_el.innerText = instruction
+      messages_ul.appendChild(instruction_el)
+    })
+    if (instructions.length > 0) {
+      messages_ul.appendChild(document.createElement('br'))
+    }
+
+    hints?.forEach((hint) => {
+      const hint_el = document.createElement('li')
+      hint_el.classList.add('hint')
+      hint_el.innerText = hint
+      messages_ul.appendChild(hint_el)
+    })
+
+    list.push(messages_container)
+  }
+  return list
+}
+
+const makeExamples = (images) => {
+  const examples_el = document.createElement('div')
+  examples_el.classList.add('examples')
+  images.forEach(({ label, src }) => {
+    const container = document.createElement('div')
+    container.classList.add('example-img-container')
+
+    const img = document.createElement('img')
+    img.src = src
+    img.alt = label
+    container.appendChild(img)
+
+    const accordion = document.createElement('details')
+    accordion.classList.add('example-accordion')
+    accordion.open = true
+    const summary = document.createElement('summary')
+    summary.innerText = label
+    accordion.appendChild(summary)
+    accordion.appendChild(container)
+    examples_el.appendChild(accordion)
+  })
+
+  return examples_el
+}
+
 const loadExercises = (inputDay) => {
   exercises
     .filter(({ day }) => day === inputDay)
@@ -290,10 +384,11 @@ const loadExercises = (inputDay) => {
       li.classList.add('exercise-item')
 
       // exercise title
-      const label_el = document.createElement('h3')
-      label_el.classList.add('label')
-      label_el.innerText = `${idx + 1}. ${label}`
-      li.appendChild(label_el)
+      const onToggle = () => {
+
+      }
+      const title = makeExerciseTitle(idx, label, onToggle)
+      li.appendChild(title)
 
       // number of repetitions / time of hold
       if (reps) {
@@ -330,75 +425,11 @@ const loadExercises = (inputDay) => {
       }
 
       // hints and caution messages
-      if (
-        (instructions && instructions.length > 0)
-        || (hints && hints.length > 0)
-        || (warnings && warnings.length > 0)
-      ) {
-        const messages_container = document.createElement('div')
-        messages_container.classList.add('message-container')
-
-        const messages_title_el = document.createElement('span')
-        messages_title_el.classList.add('message-list-title')
-        messages_title_el.innerText = 'Note:'
-        messages_container.appendChild(messages_title_el)
-
-        const messages_ul = document.createElement('ul')
-        messages_ul.classList.add('message-list')
-        messages_container.appendChild(messages_ul)
-
-        warnings?.forEach((warning) => {
-          const warning_el = document.createElement('li')
-          warning_el.classList.add('warning')
-          warning_el.innerText = warning
-          messages_ul.appendChild(warning_el)
-        })
-        if (warnings.length > 0) {
-          messages_ul.appendChild(document.createElement('br'))
-        }
-        instructions?.forEach((instruction) => {
-          const instruction_el = document.createElement('li')
-          instruction_el.classList.add('instruction')
-          instruction_el.innerText = instruction
-          messages_ul.appendChild(instruction_el)
-        })
-
-        if (instructions.length > 0) {
-          messages_ul.appendChild(document.createElement('br'))
-        }
-
-        hints?.forEach((hint) => {
-          const hint_el = document.createElement('li')
-          hint_el.classList.add('hint')
-          hint_el.innerText = hint
-          messages_ul.appendChild(hint_el)
-        })
-
-        li.appendChild(messages_container)
-      }
+      makeHints(instructions, hints, warnings)
+        .forEach((msg) => li.appendChild(msg))
 
       // accordion with examples
-      const examples_el = document.createElement('div')
-      examples_el.classList.add('examples')
-      images.forEach(({ label, src }) => {
-        const container = document.createElement('div')
-        container.classList.add('example-img-container')
-
-        const img = document.createElement('img')
-        img.src = src
-        img.alt = label
-        container.appendChild(img)
-
-        const accordion = document.createElement('details')
-        accordion.classList.add('example-accordion')
-        accordion.open = true
-        const summary = document.createElement('summary')
-        summary.innerText = label
-        accordion.appendChild(summary)
-        accordion.appendChild(container)
-        examples_el.appendChild(accordion)
-      })
-
+      const examples_el = makeExamples(images)
       li.appendChild(examples_el)
 
       list.appendChild(li)
