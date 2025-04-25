@@ -165,7 +165,7 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    set: SHORT_SET,
+    sets: SHORT_SET,
     reps: '10',
     weight: '1kg o senza',
   },
@@ -184,7 +184,7 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    set: SHORT_SET,
+    sets: SHORT_SET,
     reps: '5',
     weight: '2kg',
   },
@@ -229,7 +229,7 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    set: SHORT_SET,
+    sets: SHORT_SET,
     hold: '60 secondi',
     weight: null,
   },
@@ -249,7 +249,7 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    set: SHORT_SET,
+    sets: SHORT_SET,
     hold: '45 secondi per lato',
     weight: null,
   },
@@ -274,7 +274,7 @@ const exercises = [
       }
     ],
     rest: SHORT_REST,
-    set: SHORT_SET,
+    sets: SHORT_SET,
     hold: '45 secondi',
     weight: '2kg per mano',
   },
