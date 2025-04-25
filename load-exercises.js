@@ -3,10 +3,14 @@ const SHORT_REST = '45'
 const SHORT_SET = 2
 const LONG_SET = 3
 
+const DAY_A = 'a'
+const DAY_B = 'b'
+const DAY_C = 'c'
+
 const exercises = [
   // day A
   {
-    day: 'a',
+    day: DAY_A,
     name: 'Bodyweight Squats',
     label: 'Squat',
     hints: [
@@ -30,7 +34,7 @@ const exercises = [
     weight: 'Bilanciere',
   },
   {
-    day: 'a',
+    day: DAY_A,
     name: 'Dumbbell Glute Bridges',
     label: 'Ponte',
     instructions: [],
@@ -50,7 +54,7 @@ const exercises = [
     weight: '10kg'
   },
   {
-    day: 'a',
+    day: DAY_A,
     name: 'Side Leg Raises',
     label: 'Alzata di gamba laterale',
     instructions: [
@@ -75,7 +79,7 @@ const exercises = [
     weight: null,
   },
   {
-    day: 'a',
+    day: DAY_A,
     name: 'Seated Calf Raises',
     label: 'Alzata di polpaccio seduta',
     instructions: [],
@@ -100,7 +104,7 @@ const exercises = [
   },
   // day B
   {
-    day: 'b',
+    day: DAY_B,
     name: 'Dumbbell Bicep Curls',
     label: 'Curl',
     instructions: [
@@ -129,7 +133,7 @@ const exercises = [
     weight: '2kg',
   },
   {
-    day: 'b',
+    day: DAY_B,
     name: 'Dumbbell Shoulder Press',
     label: 'Spinte',
     instructions: [
@@ -150,7 +154,7 @@ const exercises = [
     weight: 'Bilanciere',
   },
   {
-    day: 'b',
+    day: DAY_B,
     name: 'Dumbbell Side Raises',
     label: 'Alzate laterali',
     instructions: [
@@ -170,7 +174,7 @@ const exercises = [
     weight: '1kg o senza',
   },
   {
-    day: 'b',
+    day: DAY_B,
     name: 'Dumbbell Rear Delt Squeeze',
     label: 'Croci inverse',
     instructions: [],
@@ -190,7 +194,7 @@ const exercises = [
   },
   // day C
   {
-    day: 'c',
+    day: DAY_C,
     name: 'Russian Twists',
     label: 'Twist russi',
     instructions: [],
@@ -214,7 +218,7 @@ const exercises = [
     weight: '2kg (senza manubrio: solo il disco o i due pesetti insieme)',
   },
   {
-    day: 'c',
+    day: DAY_C,
     name: 'Plank Hold',
     label: 'Plank',
     instructions: [],
@@ -234,7 +238,7 @@ const exercises = [
     weight: null,
   },
   {
-    day: 'c',
+    day: DAY_C,
     name: 'Side Plank Hold',
     label: 'Plank laterale',
     instructions: [],
@@ -254,7 +258,7 @@ const exercises = [
     weight: null,
   },
   {
-    day: 'c',
+    day: DAY_C,
     name: 'Wall Sit',
     label: 'Sedia al muro',
     instructions: [],
@@ -280,7 +284,9 @@ const exercises = [
   },
 ]
 
-// Fill list
+const list = document.querySelector('#exerciseList')
+const tabsContainer = document.querySelector('#filterTabs')
+const tabs = tabsContainer.querySelectorAll('.tab')
 
 const makeExerciseTitle = (idx, label, onToggle) => {
   const label_el = document.createElement('h3')
@@ -438,21 +444,17 @@ const loadExercises = (inputDay) => {
     })
 }
 
-const list = document.querySelector('#exerciseList')
-const tabs = document.querySelector('#filterTabs')
+const onTabClick = (tab_el) => {
+  tabs.forEach(d => d.classList.remove('selected'))
+  tab_el.classList.add('selected')
 
-loadExercises('a')
+  list.innerHTML = "";
+  const selectedDay = tab_el.id
+  loadExercises(selectedDay)
+}
 
-tabs
-  .querySelectorAll('.tab')
-  .forEach((tab_el) => {
-    tab_el.addEventListener('click', () => {
-      tabs.querySelectorAll('.tab').forEach(d => d.classList.remove('selected'))
-      tab_el.classList.add('selected')
-
-      list.innerHTML = "";
-      const selectedDay = tab_el.id
-      loadExercises(selectedDay)
-    })
-  })
+loadExercises(DAY_A)
+tabs.forEach((tab_el) =>
+  tab_el.addEventListener('click', () => onTabClick(tab_el))
+)
 
