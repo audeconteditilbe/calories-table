@@ -68,6 +68,7 @@ details[open] summary {
 
 /* BUTTONS */
 button {
+  cursor: pointer;
   border-radius: 1rem;
   padding: 0.5rem 1rem;
   border: none;

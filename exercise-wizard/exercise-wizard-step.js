@@ -47,7 +47,8 @@ class ExerciseWizardStep extends HTMLElement {
     } else if (type === 'finish') {
       content = `
         <div class="intermezzo-step finish">
-          <span>Complimenti! Hai finito il tuo allenamento!</span>
+          <span>Brava!</span>
+          <span>Hai completato l'allenamento!</span>
         </div>
       `
     }

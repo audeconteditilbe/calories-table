@@ -27,7 +27,7 @@ class HoldCounter extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../base.css">
       <link rel="stylesheet" href="./counter.css">
-      <div class="counter">
+      <div class="counter hold">
         <span class="message">Quando sei pronta premi "Inizio"</span>
         <h3 id="count" class="count">${this.count}</h3>
         <button id="startBtn">Inizo</button>
@@ -94,7 +94,7 @@ class RestCounter extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../base.css">
       <link rel="stylesheet" href="./counter.css">
-      <div class="counter">
+      <div class="counter rest">
         <span class="message">Riposa un po' bestia</span>
         <h3 id="count" class="count">${this.count}</h3>
         ${this.makeImg()}
