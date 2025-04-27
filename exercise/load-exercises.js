@@ -290,81 +290,150 @@ const list = document.querySelector('#exerciseList')
 const tabsContainer = document.querySelector('#filterTabs')
 const tabs = tabsContainer.querySelectorAll('.tab')
 
-const makeHints = (instructions, hints, warnings) => {
-  const list = []
-  if (
-    (instructions && instructions.length > 0)
-    || (hints && hints.length > 0)
-    || (warnings && warnings.length > 0)
-  ) {
-    const messages_container = document.createElement('div')
-    messages_container.classList.add('message-container')
+// const makeHints = (instructions, hints, warnings) => {
+//   const list = []
+//   if (
+//     (instructions && instructions.length > 0)
+//     || (hints && hints.length > 0)
+//     || (warnings && warnings.length > 0)
+//   ) {
+//     const messages_container = document.createElement('div')
+//     messages_container.classList.add('message-container')
+//
+//     const messages_title_el = document.createElement('span')
+//     messages_title_el.classList.add('message-list-title')
+//     messages_title_el.innerText = 'Note:'
+//     messages_container.appendChild(messages_title_el)
+//
+//     const messages_ul = document.createElement('ul')
+//     messages_ul.classList.add('message-list')
+//     messages_container.appendChild(messages_ul)
+//
+//     warnings?.forEach((warning) => {
+//       const warning_el = document.createElement('li')
+//       warning_el.classList.add('warning')
+//       warning_el.innerText = warning
+//       messages_ul.appendChild(warning_el)
+//     })
+//     if (warnings.length > 0) {
+//       messages_ul.appendChild(document.createElement('br'))
+//     }
+//
+//     instructions?.forEach((instruction) => {
+//       const instruction_el = document.createElement('li')
+//       instruction_el.classList.add('instruction')
+//       instruction_el.innerText = instruction
+//       messages_ul.appendChild(instruction_el)
+//     })
+//     if (instructions.length > 0) {
+//       messages_ul.appendChild(document.createElement('br'))
+//     }
+//
+//     hints?.forEach((hint) => {
+//       const hint_el = document.createElement('li')
+//       hint_el.classList.add('hint')
+//       hint_el.innerText = hint
+//       messages_ul.appendChild(hint_el)
+//     })
+//
+//     list.push(messages_container)
+//   }
+//   return list
+// }
+//
+// const makeExamples = (images) => {
+//   const examples_el = document.createElement('div')
+//   examples_el.classList.add('examples')
+//   images.forEach(({ label, src }) => {
+//     const accordion = document.createElement('details')
+//     accordion.classList.add('example-accordion')
+//     accordion.open = true
+//
+//     const summary = document.createElement('summary')
+//     summary.innerText = label
+//     accordion.appendChild(summary)
+//
+//     const container = document.createElement('div')
+//     container.classList.add('example-img-container')
+//     const img = document.createElement('img')
+//     img.src = src
+//     img.alt = label
+//     container.appendChild(img)
+//
+//     accordion.appendChild(container)
+//     examples_el.appendChild(accordion)
+//   })
+//
+//   return examples_el
+// }
 
-    const messages_title_el = document.createElement('span')
-    messages_title_el.classList.add('message-list-title')
-    messages_title_el.innerText = 'Note:'
-    messages_container.appendChild(messages_title_el)
-
-    const messages_ul = document.createElement('ul')
-    messages_ul.classList.add('message-list')
-    messages_container.appendChild(messages_ul)
-
-    warnings?.forEach((warning) => {
-      const warning_el = document.createElement('li')
-      warning_el.classList.add('warning')
-      warning_el.innerText = warning
-      messages_ul.appendChild(warning_el)
-    })
-    if (warnings.length > 0) {
-      messages_ul.appendChild(document.createElement('br'))
-    }
-
-    instructions?.forEach((instruction) => {
-      const instruction_el = document.createElement('li')
-      instruction_el.classList.add('instruction')
-      instruction_el.innerText = instruction
-      messages_ul.appendChild(instruction_el)
-    })
-    if (instructions.length > 0) {
-      messages_ul.appendChild(document.createElement('br'))
-    }
-
-    hints?.forEach((hint) => {
-      const hint_el = document.createElement('li')
-      hint_el.classList.add('hint')
-      hint_el.innerText = hint
-      messages_ul.appendChild(hint_el)
-    })
-
-    list.push(messages_container)
-  }
-  return list
-}
-
-const makeExamples = (images) => {
-  const examples_el = document.createElement('div')
-  examples_el.classList.add('examples')
-  images.forEach(({ label, src }) => {
-    const container = document.createElement('div')
-    container.classList.add('example-img-container')
-
-    const img = document.createElement('img')
-    img.src = src
-    img.alt = label
-    container.appendChild(img)
-
-    const accordion = document.createElement('details')
-    accordion.classList.add('example-accordion')
-    accordion.open = true
-    const summary = document.createElement('summary')
-    summary.innerText = label
-    accordion.appendChild(summary)
-    accordion.appendChild(container)
-    examples_el.appendChild(accordion)
-  })
-
-  return examples_el
-}
+// const loadExercises = (inputDay) => {
+//   exercises
+//     .filter(({ day }) => day === inputDay)
+//     .forEach(({
+//       instructions, hints, warnings, images, label, rest, sets, reps, hold, weight
+//     }, idx) => {
+//       const li = document.createElement('li')
+//
+//       const accordion = document.createElement('details')
+//       accordion.classList.add('exercise-accordion')
+//       accordion.open = true
+//
+//       const summary = document.createElement('summary')
+//       summary.classList.add('exercise-accordion-summary')
+//       summary.innerText = `${idx + 1}. ${label}`
+//       accordion.appendChild(summary)
+//
+//       const content = document.createElement('div')
+//       content.classList.add('exercise-item')
+//       accordion.appendChild(content)
+//
+//       // number of repetitions / time of hold
+//       if (reps) {
+//         const reps_el = document.createElement('span')
+//         reps_el.classList.add('reps')
+//         reps_el.innerText = `Ripetizioni: ${reps}`
+//         content.appendChild(reps_el)
+//       }
+//       if (hold) {
+//         const hold_el = document.createElement('span')
+//         hold_el.classList.add('hold')
+//         hold_el.innerText = `Mantieni per: ${hold}`
+//         content.appendChild(hold_el)
+//       }
+//
+//       // number of sets
+//       const sets_el = document.createElement('span')
+//       sets_el.classList.add('sets')
+//       sets_el.innerText = `Set: ${sets}`
+//       content.appendChild(sets_el)
+//
+//       // rest time
+//       const rest_el = document.createElement('span')
+//       rest_el.classList.add('rest')
+//       rest_el.innerText = `Riposo: ${rest} secondi fra un set e l'altro`
+//       content.appendChild(rest_el)
+//
+//       // weight
+//       if (weight) {
+//         const weight_el = document.createElement('span')
+//         weight_el.classList.add('weight')
+//         weight_el.innerText = `Peso suggerito: ${weight}`
+//         content.appendChild(weight_el)
+//       }
+//
+//       // hints and caution messages
+//       makeHints(instructions, hints, warnings)
+//         .forEach((msg) => content.appendChild(msg))
+//
+//       // accordion with examples
+//       const examples_el = makeExamples(images)
+//       content.appendChild(examples_el)
+//
+//       li.appendChild(accordion)
+//       list.appendChild(li)
+//     })
+// }
 
 const loadExercises = (inputDay) => {
   exercises
@@ -372,68 +441,25 @@ const loadExercises = (inputDay) => {
     .forEach(({
       instructions, hints, warnings, images, label, rest, sets, reps, hold, weight
     }, idx) => {
-      const li = document.createElement('li')
-      // li.classList.add('exercise-item')
+      const li = document.createElement('li');
 
-      const accordion = document.createElement('details')
-      accordion.classList.add('exercise-accordion')
-      accordion.open = true
+      const item = document.createElement('exercise-item');
+      item.setAttribute('label', `${idx + 1}. ${label}`)
+      item.setAttribute('reps', reps);
+      item.setAttribute('hold', hold);
+      item.setAttribute('sets', sets);
+      item.setAttribute('rest', rest);
+      item.setAttribute('weight', weight);
 
-      const summary = document.createElement('summary')
-      summary.classList.add('exercise-accordion-summary')
-      summary.innerText = `${idx + 1}. ${label}`
-      accordion.appendChild(summary)
+      item.setAttribute('instructions', JSON.stringify(instructions || []));
+      item.setAttribute('hints', JSON.stringify(hints || []));
+      item.setAttribute('warnings', JSON.stringify(warnings || []));
+      item.setAttribute('images', JSON.stringify(images || []));
 
-      const content = document.createElement('div')
-      content.classList.add('exercise-item')
-      accordion.appendChild(content)
-
-      // number of repetitions / time of hold
-      if (reps) {
-        const reps_el = document.createElement('span')
-        reps_el.classList.add('reps')
-        reps_el.innerText = `Ripetizioni: ${reps}`
-        content.appendChild(reps_el)
-      }
-      if (hold) {
-        const hold_el = document.createElement('span')
-        hold_el.classList.add('hold')
-        hold_el.innerText = `Mantieni per: ${hold}`
-        content.appendChild(hold_el)
-      }
-
-      // number of sets
-      const sets_el = document.createElement('span')
-      sets_el.classList.add('sets')
-      sets_el.innerText = `Set: ${sets}`
-      content.appendChild(sets_el)
-
-      // rest time
-      const rest_el = document.createElement('span')
-      rest_el.classList.add('rest')
-      rest_el.innerText = `Riposo: ${rest} secondi fra un set e l'altro`
-      content.appendChild(rest_el)
-
-      // weight
-      if (weight) {
-        const weight_el = document.createElement('span')
-        weight_el.classList.add('weight')
-        weight_el.innerText = `Peso suggerito: ${weight}`
-        content.appendChild(weight_el)
-      }
-
-      // hints and caution messages
-      makeHints(instructions, hints, warnings)
-        .forEach((msg) => content.appendChild(msg))
-
-      // accordion with examples
-      const examples_el = makeExamples(images)
-      content.appendChild(examples_el)
-
-      li.appendChild(accordion)
-      list.appendChild(li)
-    })
-}
+      li.appendChild(item);
+      list.appendChild(li);
+    });
+};
 
 const onTabClick = (tab_el) => {
   tabs.forEach(d => d.classList.remove('selected'))
