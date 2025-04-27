@@ -20,15 +20,36 @@ class ExerciseWizardStep extends HTMLElement {
     `
 
     if (type === 'exercise' && data.reps) {
-      content = this.makeRepsContent(label, setNr, data)
+      content = this.makeExerciseCard(label, setNr, data)
     }
     else if (type === 'exercise' && data.hold) {
       const { hold } = data
-      content = `<rest-counter start=${hold} />`
+      console.log('hold', this.makeExerciseCard(label, setNr, data))
+      content = `
+        <div>
+          <hold-counter start=${hold}></hold-counter>
+          <br />
+          ${this.makeExerciseCard(label, setNr, data)}
+        </div>
+      `
     }
     else if (type === 'rest') {
       const { rest } = data
       content = `<rest-counter start=${rest} />`
+    }
+    else if (type === 'change-exercise') {
+      content = `
+        <div class="intermezzo-step">
+          <span>Prossimo esercizio:</span>
+          <h3>${data.next}</h3>
+        </div>
+      `
+    } else if (type === 'finish') {
+      content = `
+        <div class="intermezzo-step finish">
+          <span>Complimenti! Hai finito il tuo allenamento!</span>
+        </div>
+      `
     }
 
     this.shadowRoot.innerHTML = `
@@ -38,13 +59,7 @@ class ExerciseWizardStep extends HTMLElement {
     `
   }
 
-  makeCounterContent(label, setNr, data) {
-    return `
-
-    `
-  }
-
-  makeRepsContent(
+  makeExerciseCard(
     label,
     setNr,
     data
@@ -60,10 +75,10 @@ class ExerciseWizardStep extends HTMLElement {
     } = data
 
     return `
-        <div class="wizard-step-container">
+        <div class="exercise-step">
           <h3>${label} (set ${setNr} di ${sets})</h3>
           <div class="exercise-item">
-            <span class="reps">Ripetizioni: ${reps}</span>
+            ${reps && `<span class="reps">Ripetizioni: ${reps}</span>`}
             ${weight ? `<span class="weight">Peso suggerito: ${weight}</span>` : ''}
             ${this.makeHints(instructions, hints, warnings)}
             ${this.makeExamples(images)}

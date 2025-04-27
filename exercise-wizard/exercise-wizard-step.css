@@ -1,13 +1,40 @@
-/* Exercise card container (is an accordion) */
-.wizard-step-container {
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 3px 3px 13px #888;
+/* Change exercise steps */
+/* Finish step */
+.intermezzo-step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 0.5rem;
+  gap: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+
+  &.finish {
+    border-radius: 1rem;
+    background-color: #00ba47;
+  }
+}
+
+
+
+/* Counter steps */
+hold-counter {
+  display: flex;
+  flex-grow: 1;
 }
 
 rest-counter {
   display: flex;
   flex-grow: 1;
+}
+
+/* Exercise steps */
+.exercise-step {
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 13px #888;
 }
 
 /* Exercise card content */

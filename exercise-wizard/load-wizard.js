@@ -14,23 +14,44 @@ const pageTitle = context.day
   : 'Daje 💪'
 
 const makeSteps = (exercises) => {
-  return exercises.reduce((acc, exercise, exerciseNr) => {
+  return exercises.reduce((acc, exercise, exerciseIdx) => {
     const { rest, sets, label } = exercise
-    Array(sets).fill(0).forEach((_, setNr) => {
+    const isLastExercise = exerciseIdx === exercises.length - 1
+
+    Array(sets).fill(0).forEach((_, setIdx) => {
+      const isLastSet = setIdx === sets - 1
       acc.push({
         type: 'exercise',
-        setNr: setNr + 1,
-        exerciseNr: exerciseNr + 1,
+        setNr: setIdx + 1,
+        exerciseNr: exerciseIdx + 1,
         label,
         data: exercise,
       })
-      if (setNr + 1 !== sets) {
+      if (!isLastSet) {
         acc.push({
           type: 'rest',
-          setNr: setNr + 1,
-          exerciseNr: exerciseNr + 1,
+          setNr: setIdx + 1,
+          exerciseNr: exerciseIdx + 1,
           label,
           data: { rest },
+        })
+      } else if (isLastSet && !isLastExercise) {
+        acc.push({
+          type: 'change-exercise',
+          setNr: setIdx + 1,
+          exerciseNr: exerciseIdx + 1,
+          label,
+          data: {
+            next: exercises[exerciseIdx + 1].label,
+          },
+        })
+      } else if (isLastSet && isLastExercise) {
+        acc.push({
+          type: 'finish',
+          setNr: setIdx + 1,
+          exerciseNr: exerciseIdx + 1,
+          label,
+          data: {},
         })
       }
     })

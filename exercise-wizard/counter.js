@@ -14,6 +14,73 @@ const COLORS = [
   '#f2f2f2',
 ]
 
+class HoldCounter extends HTMLElement {
+  constructor() {
+    super()
+    this.attachShadow({ mode: 'open' })
+    this.start = parseInt(this.getAttribute('start')) || 60
+    this.count = this.start
+    this.intervalId = null
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="../base.css">
+      <link rel="stylesheet" href="./counter.css">
+      <div class="counter">
+        <span class="message">Quando sei pronta premi "Inizio"</span>
+        <h3 id="count" class="count">${this.count}</h3>
+        <button id="startBtn">Inizo</button>
+      </div>
+    `
+    this.countEl = this.shadowRoot.querySelector('#count')
+
+    this.startBtn = this.shadowRoot.querySelector('#startBtn')
+    this.startBtn.addEventListener('click', () => {
+      this.startCounter()
+      this.applyBackground()
+    })
+
+    this.addEventListener('next-step', () => {
+      clearInterval(this.intervalId)
+    })
+    this.addEventListener('prev-step', () => {
+      clearInterval(this.intervalId)
+    })
+  }
+
+  disconnectedCallback() {
+    clearInterval(this.intervalId)
+  }
+
+  updateCount() {
+    if (this.countEl) {
+      this.countEl.textContent = this.count
+      this.applyBackground()
+    }
+  }
+
+  startCounter() {
+    this.intervalId = setInterval(() => {
+      this.count--
+      this.updateCount()
+      if (this.count <= 0) {
+        this.dispatchEvent(new CustomEvent(
+          'next-step',
+          { bubbles: true, composed: true }
+        ))
+      }
+    }, 1000)
+  }
+
+  applyBackground() {
+    const percentage = this.count / this.start
+    const index = Math.floor(COLORS.length - (COLORS.length * percentage))
+    const color = COLORS[index] ?? COLORS[0]
+    this.shadowRoot.querySelector('.counter').style.backgroundColor = color
+  }
+}
+
 class RestCounter extends HTMLElement {
   constructor() {
     super()
@@ -26,8 +93,8 @@ class RestCounter extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../base.css">
-      <link rel="stylesheet" href="./rest-counter.css">
-      <div class="rest-counter">
+      <link rel="stylesheet" href="./counter.css">
+      <div class="counter">
         <span class="message">Riposa un po' bestia</span>
         <h3 id="count" class="count">${this.count}</h3>
         ${this.makeImg()}
@@ -92,8 +159,9 @@ class RestCounter extends HTMLElement {
     const percentage = this.count / this.start
     const index = Math.floor(COLORS.length - (COLORS.length * percentage))
     const color = COLORS[index] ?? COLORS[0]
-    this.shadowRoot.querySelector('.rest-counter').style.backgroundColor = color
+    this.shadowRoot.querySelector('.counter').style.backgroundColor = color
   }
 }
 
 customElements.define('rest-counter', RestCounter)
+customElements.define('hold-counter', HoldCounter)
