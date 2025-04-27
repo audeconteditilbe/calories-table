@@ -29,13 +29,12 @@
   content: " ▼";
 }
 
+/* Exercise card content */
 .exercise-item {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-
-/* Exercise card content */
 
 .message-container {
   margin-bottom: 5px;

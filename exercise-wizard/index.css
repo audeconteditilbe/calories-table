@@ -1,0 +1,44 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+/* Title */
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title>a {
+  text-decoration: none;
+}
+
+/* Prev - next buttons */
+
+.wizard-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Wizard content */
+
+#wizardContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 1rem;
+
+  exercise-wizard-step {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
