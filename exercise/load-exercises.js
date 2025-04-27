@@ -318,7 +318,6 @@ const exercises = [
 
 const list = document.querySelector('#exerciseList')
 const tabsContainer = document.querySelector('#filterTabs')
-const tabs = tabsContainer.querySelectorAll('.tab')
 
 const loadExercises = (inputDay) => {
   exercises
@@ -345,17 +344,48 @@ const loadExercises = (inputDay) => {
     })
 }
 
-const onTabClick = (tab_el) => {
-  tabs.forEach(d => d.classList.remove('selected'))
-  tab_el.classList.add('selected')
+const loadTabs = () => {
+  const tabA = document.createElement('div')
+  tabA.classList.add('nowrap', 'tab', 'selected')
+  tabA.id = DAY_A
+  tabA.innerText = 'Giorno A'
+  const tabB = document.createElement('div')
+  tabB.classList.add('nowrap', 'tab')
+  tabB.id = DAY_B
+  tabB.innerText = 'Giorno B'
+  const tabC = document.createElement('div')
+  tabC.classList.add('nowrap', 'tab')
+  tabC.id = DAY_C
+  tabC.innerText = 'Giorno C'
 
-  list.innerHTML = ""
-  const selectedDay = tab_el.id
-  loadExercises(selectedDay)
+  const tabs = [tabA, tabB, tabC]
+
+  const onTabClick = (tab_el) => {
+    tabs.forEach(d => d.classList.remove('selected'))
+    tab_el.classList.add('selected')
+
+    list.innerHTML = ""
+    const selectedDay = tab_el.id
+    loadExercises(selectedDay)
+  }
+
+  tabs.forEach((tab_el) => tab_el.addEventListener('click', () => onTabClick(tab_el)))
+
+  const separator = () => {
+    const vl = document.createElement('div')
+    vl.classList.add('vl')
+    return vl
+  }
+
+  tabsContainer.appendChild(separator())
+  tabsContainer.appendChild(tabA)
+  tabsContainer.appendChild(separator())
+  tabsContainer.appendChild(tabB)
+  tabsContainer.appendChild(separator())
+  tabsContainer.appendChild(tabC)
+  tabsContainer.appendChild(separator())
 }
 
+loadTabs()
 loadExercises(DAY_A)
-tabs.forEach((tab_el) =>
-  tab_el.addEventListener('click', () => onTabClick(tab_el))
-)
 
