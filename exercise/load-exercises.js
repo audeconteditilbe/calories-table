@@ -1,4 +1,4 @@
-const SHORT_REST = '45'
+const SHORT_REST = 45
 
 const SHORT_SET = 2
 const LONG_SET = 3
@@ -316,10 +316,37 @@ const exercises = [
   },
 ]
 
+const getQuery = () => {
+  return window.location.search.substring(1).split('&').reduce((acc, param) => {
+    const [key, val] = param.split('=')
+    if (key) {
+      acc[key] = val
+    }
+    return acc
+  }, {})
+}
+
+const setQuery = (patch = {}) => {
+  const query = { ...getQuery(), ...patch }
+  const qs = Object.entries(query).reduce((acc, [key, val]) => {
+    acc.push(`${key}=${val}`)
+    return acc
+  }, []).join('&')
+  window.history.pushState({}, '', `?${qs}`)
+}
+
 const list = document.querySelector('#exerciseList')
 const tabsContainer = document.querySelector('#filterTabs')
+const goToWizardButton = document.querySelector('#goToWizard')
+
+const makeVL = () => {
+  const vl = document.createElement('div')
+  vl.classList.add('vl')
+  return vl
+}
 
 const loadExercises = (inputDay) => {
+  list.innerHTML = ""
   exercises
     .filter(({ day }) => day === inputDay)
     .forEach(({
@@ -346,46 +373,57 @@ const loadExercises = (inputDay) => {
 
 const loadTabs = () => {
   const tabA = document.createElement('div')
-  tabA.classList.add('nowrap', 'tab', 'selected')
+  tabA.classList.add('nowrap', 'tab')
   tabA.id = DAY_A
   tabA.innerText = 'Giorno A'
+
   const tabB = document.createElement('div')
   tabB.classList.add('nowrap', 'tab')
   tabB.id = DAY_B
   tabB.innerText = 'Giorno B'
+
   const tabC = document.createElement('div')
   tabC.classList.add('nowrap', 'tab')
   tabC.id = DAY_C
   tabC.innerText = 'Giorno C'
 
-  const tabs = [tabA, tabB, tabC]
+  tabsContainer.appendChild(makeVL())
+  tabsContainer.appendChild(tabA)
+  tabsContainer.appendChild(makeVL())
+  tabsContainer.appendChild(tabB)
+  tabsContainer.appendChild(makeVL())
+  tabsContainer.appendChild(tabC)
+  tabsContainer.appendChild(makeVL())
 
-  const onTabClick = (tab_el) => {
+  const tabs = [tabA, tabB, tabC]
+  const onSelectedDay = (day) => {
     tabs.forEach(d => d.classList.remove('selected'))
+    const tab_el = tabsContainer.querySelector(`#${day}`)
     tab_el.classList.add('selected')
 
-    list.innerHTML = ""
-    const selectedDay = tab_el.id
-    loadExercises(selectedDay)
+    setQuery({ day })
+    loadExercises(day)
   }
+  tabA.addEventListener('click', () => onSelectedDay(DAY_A))
+  tabB.addEventListener('click', () => onSelectedDay(DAY_B))
+  tabC.addEventListener('click', () => onSelectedDay(DAY_C))
 
-  tabs.forEach((tab_el) => tab_el.addEventListener('click', () => onTabClick(tab_el)))
-
-  const separator = () => {
-    const vl = document.createElement('div')
-    vl.classList.add('vl')
-    return vl
-  }
-
-  tabsContainer.appendChild(separator())
-  tabsContainer.appendChild(tabA)
-  tabsContainer.appendChild(separator())
-  tabsContainer.appendChild(tabB)
-  tabsContainer.appendChild(separator())
-  tabsContainer.appendChild(tabC)
-  tabsContainer.appendChild(separator())
+  return onSelectedDay
 }
 
-loadTabs()
-loadExercises(DAY_A)
+const onWizardNavigation = () => {
+  const currentDay = tabsContainer.querySelector('.selected').id
+  const dst = '../exercise-wizard/index.html'
+  const context = {
+    day: currentDay,
+    exercises: exercises.filter(({ day }) => day === currentDay),
+  }
+  sessionStorage.setItem('context', JSON.stringify(context))
+  window.location.href = dst
+}
+
+const query = getQuery()
+const selectDay = loadTabs()
+goToWizardButton.addEventListener('click', onWizardNavigation)
+selectDay(query.day ?? DAY_A)
 

@@ -1,32 +1,8 @@
 /* Exercise card container (is an accordion) */
-.exercise-accordion {
+.wizard-step-container {
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 3px 3px 13px #888;
-
-  .exercise-accordion-summary {
-    padding: 1rem;
-    background-color: inherit;
-  }
-}
-
-/* place summary icon to the right */
-.exercise-accordion-summary {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-}
-
-.exercise-accordion-summary::-webkit-details-marker {
-  display: none
-}
-
-.exercise-accordion-summary::after {
-  content: ' ►';
-}
-
-.exercise-accordion[open] .exercise-accordion-summary:after {
-  content: " ▼";
 }
 
 /* Exercise card content */
