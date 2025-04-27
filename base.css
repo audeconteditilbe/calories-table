@@ -66,6 +66,15 @@ details[open] summary {
   margin-bottom: 0.5em;
 }
 
+/* BUTTONS */
+button {
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #e2e2e2;
+}
+
+
 /* SHARED CLASSES */
 
 .nowrap {
