@@ -5,6 +5,14 @@ const nextButton = document.querySelector('#nextButton')
 const context = JSON.parse(sessionStorage.getItem('context')) ?? {}
 let currentStep = 0
 
+const backHref = context.day
+  ? `../exercise/index.html?day=${context.day}`
+  : "../index.html"
+
+const pageTitle = context.day
+  ? `Giorno ${context.day.toUpperCase()}`
+  : 'Daje 💪'
+
 const makeSteps = (exercises) => {
   return exercises.reduce((acc, exercise, exerciseNr) => {
     const { rest, sets, label } = exercise
@@ -30,17 +38,19 @@ const makeSteps = (exercises) => {
   }, [])
 }
 
-// define back button target
-const backButton = document.querySelector('#backButton')
-backButton.href = context.day
-  ? `../exercise/index.html?day=${context.day}`
-  : "../index.html"
-
 const emit = (event) => {
   container.dispatchEvent(
     new CustomEvent(event, { bubbles: true, composed: true })
   )
 }
+
+// set page title
+const title = document.querySelector('#pageTitle')
+title.innerHTML = pageTitle
+
+// set back button target
+const backButton = document.querySelector('#backButton')
+backButton.href = backHref
 
 // load step
 const loadStep = ({
@@ -59,7 +69,7 @@ const loadStep = ({
   container.appendChild(item)
 }
 
-// handle step navigation
+// handle steps navigation
 prevButton.addEventListener('click', () => emit('prev-step'))
 nextButton.addEventListener('click', () => emit('next-step'))
 container.addEventListener('prev-step', () => {
@@ -72,6 +82,8 @@ container.addEventListener('next-step', () => {
   if (currentStep < steps.length - 1) {
     currentStep += 1
     loadStep(steps[currentStep], currentStep)
+  } else {
+    window.location.href = backHref
   }
 })
 
