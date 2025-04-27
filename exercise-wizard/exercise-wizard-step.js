@@ -6,47 +6,60 @@ class ExerciseWizardStep extends HTMLElement {
 
   connectedCallback() {
     const type = this.getAttribute('type')
-    const label = this.getAttribute('label') || ''
+    const label = this.getAttribute('label')
     const setNr = this.getAttribute('set-nr')
+    const stepNr = this.getAttribute('step-nr')
     const exerciseNr = this.getAttribute('exercise-nr')
     const data = this.getAttribute('data')
       ? JSON.parse(this.getAttribute('data')) : {}
 
+    let content = `
+      <span>
+        Ups tuo fratello è un po' pirla e ha sbagliato qualcosa... mandagli un messaggio!
+      </span>
+    `
+
     if (type === 'exercise' && data.reps) {
-      this.shadowRoot.innerHTML = this.makeRepsContent(type, label, setNr, exerciseNr, data)
+      content = this.makeRepsContent(label, setNr, data)
     }
     else if (type === 'exercise' && data.hold) {
       const { hold } = data
-      // // TODO: timer
-      this.shadowRoot.innerHTML = `<rest-counter start=${hold} />`
+      content = `<rest-counter start=${hold} />`
     }
     else if (type === 'rest') {
       const { rest } = data
-      // // TODO: timer
-      // this.shadowRoot.innerHTML = `
-      //   <div>Riposa per ${rest} seconds</div>
-      // `
-      this.shadowRoot.innerHTML = `<rest-counter start=${10} />`
+      content = `<rest-counter start=${rest} />`
     }
+
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="../base.css">
+      <link rel="stylesheet" href="./exercise-wizard-step.css">
+      ${content}
+    `
+  }
+
+  makeCounterContent(label, setNr, data) {
+    return `
+
+    `
   }
 
   makeRepsContent(
-    type, label, setNr, exerciseNr, data
+    label,
+    setNr,
+    data
   ) {
     const {
       instructions = [],
       hints = [],
       warnings = [],
       images = [],
-      rest = '',
       reps = '',
       sets = '',
       weight = '',
     } = data
 
     return `
-        <link rel="stylesheet" href="../base.css">
-        <link rel="stylesheet" href="./exercise-wizard-step.css">
         <div class="wizard-step-container">
           <h3>${label} (set ${setNr} di ${sets})</h3>
           <div class="exercise-item">

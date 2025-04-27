@@ -5,6 +5,11 @@
   box-shadow: 3px 3px 13px #888;
 }
 
+rest-counter {
+  display: flex;
+  flex-grow: 1;
+}
+
 /* Exercise card content */
 .exercise-item {
   display: flex;

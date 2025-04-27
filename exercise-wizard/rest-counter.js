@@ -1,14 +1,41 @@
+const COLORS = [
+  '#81c9c8',
+  '#8cc4c3',
+  '#8cd1d0',
+  '#8fd6d5',
+  '#9fd8d7',
+  '#a8e0de',
+  '#b2e0de',
+  '#b8e4e2',
+  '#c5e8e5',
+  '#c8e9e5',
+  '#d8f0ec',
+  '#e0f2ef',
+  '#f2f2f2',
+]
+
 class RestCounter extends HTMLElement {
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
-    this.count = parseInt(this.getAttribute('start')) || 10
+    this.start = parseInt(this.getAttribute('start')) || 45
+    this.count = this.start
     this.intervalId = null
   }
 
   connectedCallback() {
-    this.render()
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="../base.css">
+      <link rel="stylesheet" href="./rest-counter.css">
+      <div class="rest-counter">
+        <span class="message">Riposa un po' bestia</span>
+        <h3 id="count" class="count">${this.count}</h3>
+        ${this.makeImg()}
+      </div>
+    `
+    this.countEl = this.shadowRoot.querySelector('#count')
     this.startCounter()
+    this.applyBackground()
 
     this.addEventListener('next-step', () => {
       clearInterval(this.intervalId)
@@ -16,17 +43,23 @@ class RestCounter extends HTMLElement {
     this.addEventListener('prev-step', () => {
       clearInterval(this.intervalId)
     })
-
   }
 
   disconnectedCallback() {
     clearInterval(this.intervalId)
   }
 
+  updateCount() {
+    if (this.countEl) {
+      this.countEl.textContent = this.count
+      this.applyBackground()
+    }
+  }
+
   startCounter() {
     this.intervalId = setInterval(() => {
       this.count--
-      this.render()
+      this.updateCount()
       if (this.count <= 0) {
         this.dispatchEvent(new CustomEvent(
           'next-step',
@@ -36,8 +69,30 @@ class RestCounter extends HTMLElement {
     }, 1000)
   }
 
-  render() {
-    this.shadowRoot.innerHTML = `<div>${this.count}</div>`
+  makeImg() {
+    const paths = [
+      `../assets/pause/pause-1.gif`,
+      `../assets/pause/pause-2.gif`,
+      `../assets/pause/pause-3.gif`,
+      `../assets/pause/pause-4.gif`,
+      `../assets/pause/pause-5.gif`,
+      `../assets/pause/pause-6.gif`,
+      `../assets/pause/pause-7.gif`,
+      `../assets/pause/pause-8.gif`
+    ]
+    const rand = Math.floor(Math.random() * paths.length)
+    return `
+      <div class="img-container">
+        <img src=${paths[rand]} />
+      </div>
+    `
+  }
+
+  applyBackground() {
+    const percentage = this.count / this.start
+    const index = Math.floor(COLORS.length - (COLORS.length * percentage))
+    const color = COLORS[index] ?? COLORS[0]
+    this.shadowRoot.querySelector('.rest-counter').style.backgroundColor = color
   }
 }
 

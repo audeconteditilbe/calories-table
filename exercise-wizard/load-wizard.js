@@ -36,11 +36,16 @@ backButton.href = context.day
   ? `../exercise/index.html?day=${context.day}`
   : "../index.html"
 
+const emit = (event) => {
+  container.dispatchEvent(
+    new CustomEvent(event, { bubbles: true, composed: true })
+  )
+}
+
 // load step
 const loadStep = ({
   type, setNr, exerciseNr, label, data
 }, stepNr) => {
-  console.log('loading', stepNr)
   container.innerHTML = ''
 
   const item = document.createElement('exercise-wizard-step')
@@ -48,33 +53,28 @@ const loadStep = ({
   item.setAttribute('set-nr', setNr)
   item.setAttribute('exercise-nr', exerciseNr)
   item.setAttribute('label', label)
+  item.setAttribute('step-nr', stepNr)
   item.setAttribute('data', JSON.stringify(data))
 
   container.appendChild(item)
 }
 
-const onNext = () => {
-  currentStep += 1
-  loadStep(steps[currentStep], currentStep)
-}
-const onPrev = () => {
-  currentStep -= 1
-  loadStep(steps[currentStep], currentStep)
-}
-prevButton.addEventListener('click', () => {
-  container.dispatchEvent(new CustomEvent(
-    'prev-step',
-    { bubbles: true, composed: true }
-  ))
+// handle step navigation
+prevButton.addEventListener('click', () => emit('prev-step'))
+nextButton.addEventListener('click', () => emit('next-step'))
+container.addEventListener('prev-step', () => {
+  if (currentStep > 0) {
+    currentStep -= 1
+    loadStep(steps[currentStep], currentStep)
+  }
 })
-nextButton.addEventListener('click', () => {
-  container.dispatchEvent(new CustomEvent(
-    'next-step',
-    { bubbles: true, composed: true }
-  ))
+container.addEventListener('next-step', () => {
+  if (currentStep < steps.length - 1) {
+    currentStep += 1
+    loadStep(steps[currentStep], currentStep)
+  }
 })
-container.addEventListener('prev-step', onPrev)
-container.addEventListener('next-step', onNext)
 
+// init
 const steps = makeSteps(context.exercises)
 loadStep(steps[0], 0)
