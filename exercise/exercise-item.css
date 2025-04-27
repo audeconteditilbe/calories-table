@@ -48,10 +48,13 @@
     list-style-type: none;
   }
 
-  .instruction {}
+  .instruction {
+    font-style: italic;
+  }
 
   .instruction::marker {
     content: 'ℹ️ ';
+    font-style: normal;
   }
 
   .hint {
@@ -88,7 +91,7 @@
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 
   .example-accordion {}
 
@@ -110,9 +113,9 @@
   }
 }
 
-@media (min-width: 768px) {
-  .examples {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-}
+/* @media (min-width: 768px) { */
+/*   .examples { */
+/*     display: grid; */
+/*     grid-template-columns: 1fr 1fr; */
+/*   } */
+/* } */

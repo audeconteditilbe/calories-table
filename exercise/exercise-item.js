@@ -1,7 +1,7 @@
 class ExerciseItem extends HTMLElement {
   constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
+    super()
+    this.attachShadow({ mode: 'open' })
   }
 
   connectedCallback() {
@@ -22,8 +22,8 @@ class ExerciseItem extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../base.css">
-      <link rel="stylesheet" href="exercise-item.css">
-      <details class="exercise-accordion">
+      <link rel="stylesheet" href="./exercise-item.css">
+      <details class="exercise-accordion" open>
         <summary class="exercise-accordion-summary">
           ${label}
         </summary>
@@ -35,22 +35,23 @@ class ExerciseItem extends HTMLElement {
           ${weight ? `<span class="weight">Peso suggerito: ${weight}</span>` : ''}
 
           ${this.makeHints(instructions, hints, warnings)}
-          ${images.length > 0 ? this.makeExamples(images) : ''}
+          ${this.makeExamples(images)}
         </div>
       </details>
     `
   }
 
   makeExamples(images) {
-    const exampleAccordions = images.map(({ label, src }) => {
+    if (images.length === 0) return ''
+    const exampleAccordions = images.map(({ label, src, open = true }) => {
       return `
-        <details class="example-accordion" open>
+        <details class="example-accordion" ${open ? 'open' : ''}>
           <summary>${label}</summary>
           <div class="example-img-container">
             <img src="${src}" alt="${label}" />
           </div>
         </details>
-      `;
+      `
     }).join('')
     return `<div class="examples">${exampleAccordions}</div>`
   }
@@ -66,13 +67,13 @@ class ExerciseItem extends HTMLElement {
           <span class="message-list-title">Note:</span>
           <ul class="message-list">
             ${instructions.map(instruction => `<li class="instruction">${instruction}</li>`).join('')}
-            ${warnings.length > 0 ? '<br />' : ''}
+            ${instructions.length > 0 ? '<br />' : ''}
             ${warnings.map(warning => `<li class="warning">${warning}</li>`).join('')}
-            ${hints.length > 0 ? '<br />' : ''}
+            ${warnings.length > 0 ? '<br />' : ''}
             ${hints.map(hint => `<li class="hint">${hint}</li>`).join('')}
           </ul>
         </div>
-      `;
+      `
     }
     return ''
   }
