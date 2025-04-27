@@ -7,6 +7,8 @@ const DAY_A = 'a'
 const DAY_B = 'b'
 const DAY_C = 'c'
 
+const img = (fileName) => `../assets/exercises/${fileName}`
+
 const exercises = [
   // day A
   {
@@ -14,18 +16,18 @@ const exercises = [
     name: 'Bodyweight Squats',
     label: 'Squat',
     hints: [
-      'Esegui la variante con o senza i manubri a seconda della difficoltà.'
+      'Esegui la variante con o senza bilanciere a seconda della difficoltà.'
     ],
     instructions: [],
     warnings: [],
     images: [
       {
         label: 'Base',
-        src: './assets/squat.gif'
+        src: img('squat.gif')
       },
       {
-        label: 'Con manubri',
-        src: './assets/squat-w-barbell.gif'
+        label: 'Con bilanciere',
+        src: img('squat-w-barbell.gif')
       },
     ],
     rest: SHORT_REST,
@@ -45,7 +47,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/glutes-bridge.gif'
+        src: img('glutes-bridge.gif')
       }
     ],
     rest: SHORT_REST,
@@ -70,7 +72,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/side-leg-raise.gif'
+        src: img('side-leg-raise.gif')
       }
     ],
     rest: SHORT_REST,
@@ -81,7 +83,7 @@ const exercises = [
   {
     day: DAY_A,
     name: 'Seated Calf Raises',
-    label: 'Alzata di polpaccio seduta',
+    label: 'Alzata di polpaccio',
     instructions: [],
     hints: [
       'Esegui la variante con o senza i manubri a seconda della difficoltà.'
@@ -90,11 +92,11 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/calf-raises.gif'
+        src: img('calf-raises.gif')
       },
       {
         label: 'Con bilancere',
-        src: './assets/calf-raises-w-dumbbell.gif'
+        src: img('calf-raises-w-dumbbell.gif')
       }
     ],
     rest: SHORT_REST,
@@ -120,16 +122,16 @@ const exercises = [
     images: [
       {
         label: 'Senza rotazione dei gomiti',
-        src: './assets/curl.gif'
+        src: img('curl.gif')
       },
       {
         label: 'Con rotazione dei gomiti',
-        src: './assets/curl-2.gif'
+        src: img('curl-2.gif')
       }
     ],
     rest: SHORT_REST,
     sets: LONG_SET,
-    reps: '10',
+    reps: '8',
     weight: '2kg',
   },
   {
@@ -145,12 +147,12 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/shoulder-press.gif'
+        src: img('shoulder-press.gif')
       }
     ],
     rest: SHORT_REST,
     sets: LONG_SET,
-    reps: '10',
+    reps: '8',
     weight: 'Bilanciere',
   },
   {
@@ -165,7 +167,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/side-raises.gif'
+        src: img('side-raises.gif')
       }
     ],
     rest: SHORT_REST,
@@ -184,7 +186,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/rear-deltoid-lift.gif'
+        src: img('rear-deltoid-lift.gif')
       }
     ],
     rest: SHORT_REST,
@@ -205,11 +207,11 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/russian-twist.gif'
+        src: img('russian-twist.gif')
       },
       {
         label: 'Esempio con manubri',
-        src: './assets/russian-twist-w-dumbbell.gif'
+        src: img('russian-twist-w-dumbbell.gif')
       }
     ],
     rest: SHORT_REST,
@@ -229,7 +231,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/plank.jpg'
+        src: img('plank.jpg')
       }
     ],
     rest: SHORT_REST,
@@ -249,7 +251,7 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/side-plank.jpg'
+        src: img('side-plank.jpg')
       }
     ],
     rest: SHORT_REST,
@@ -270,11 +272,11 @@ const exercises = [
     images: [
       {
         label: 'Base',
-        src: './assets/wall-sit.jpg'
+        src: img('wall-sit.jpg')
       },
       {
         label: 'Con manubri',
-        src: './assets/wall-sit-w-dumbbell.jpg'
+        src: img('wall-sit-w-dumbbell.jpg')
       }
     ],
     rest: SHORT_REST,
@@ -287,24 +289,6 @@ const exercises = [
 const list = document.querySelector('#exerciseList')
 const tabsContainer = document.querySelector('#filterTabs')
 const tabs = tabsContainer.querySelectorAll('.tab')
-
-const makeExerciseTitle = (idx, label, onToggle) => {
-  const label_el = document.createElement('h3')
-  label_el.classList.add('label')
-  label_el.innerText = `${idx + 1}. ${label}`
-
-  const close_btn = document.createElement('button')
-  close_btn.classList.add('close-btn')
-  close_btn.innerText = '+'
-  close_btn.addEventListener('click', onToggle)
-
-  const div = document.createElement('div')
-  div.classList.add('exercise-title')
-  div.appendChild(label_el)
-  div.appendChild(close_btn)
-
-  return div
-}
 
 const makeHints = (instructions, hints, warnings) => {
   const list = []
@@ -391,55 +375,55 @@ const loadExercises = (inputDay) => {
       const li = document.createElement('li')
       li.classList.add('exercise-item')
 
-      // exercise title
-      const onToggle = () => {
-
-      }
-      const title = makeExerciseTitle(idx, label, onToggle)
-      li.appendChild(title)
+      const accordion = document.createElement('details')
+      accordion.open = true
+      const summary = document.createElement('summary')
+      summary.innerText = `${idx + 1}. ${label}`
+      accordion.appendChild(summary)
 
       // number of repetitions / time of hold
       if (reps) {
         const reps_el = document.createElement('span')
         reps_el.classList.add('reps')
         reps_el.innerText = `Ripetizioni: ${reps}`
-        li.appendChild(reps_el)
+        accordion.appendChild(reps_el)
       }
       if (hold) {
         const hold_el = document.createElement('span')
         hold_el.classList.add('hold')
         hold_el.innerText = `Mantieni per: ${hold}`
-        li.appendChild(hold_el)
+        accordion.appendChild(hold_el)
       }
 
       // number of sets
       const sets_el = document.createElement('span')
       sets_el.classList.add('sets')
       sets_el.innerText = `Set: ${sets}`
-      li.appendChild(sets_el)
+      accordion.appendChild(sets_el)
 
       // rest time
       const rest_el = document.createElement('span')
       rest_el.classList.add('rest')
-      rest_el.innerText = `Riposa per ${rest} secondi fra un set e l'altro`
-      li.appendChild(rest_el)
+      rest_el.innerText = `Riposo: ${rest} secondi fra un set e l'altro`
+      accordion.appendChild(rest_el)
 
       // weight
       if (weight) {
         const weight_el = document.createElement('span')
         weight_el.classList.add('weight')
         weight_el.innerText = `Peso suggerito: ${weight}`
-        li.appendChild(weight_el)
+        accordion.appendChild(weight_el)
       }
 
       // hints and caution messages
       makeHints(instructions, hints, warnings)
-        .forEach((msg) => li.appendChild(msg))
+        .forEach((msg) => accordion.appendChild(msg))
 
       // accordion with examples
       const examples_el = makeExamples(images)
-      li.appendChild(examples_el)
+      accordion.appendChild(examples_el)
 
+      li.appendChild(accordion)
       list.appendChild(li)
     })
 }
