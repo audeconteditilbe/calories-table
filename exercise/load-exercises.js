@@ -373,55 +373,62 @@ const loadExercises = (inputDay) => {
       instructions, hints, warnings, images, label, rest, sets, reps, hold, weight
     }, idx) => {
       const li = document.createElement('li')
-      li.classList.add('exercise-item')
+      // li.classList.add('exercise-item')
 
       const accordion = document.createElement('details')
+      accordion.classList.add('exercise-accordion')
       accordion.open = true
+
       const summary = document.createElement('summary')
+      summary.classList.add('exercise-accordion-summary')
       summary.innerText = `${idx + 1}. ${label}`
       accordion.appendChild(summary)
+
+      const content = document.createElement('div')
+      content.classList.add('exercise-item')
+      accordion.appendChild(content)
 
       // number of repetitions / time of hold
       if (reps) {
         const reps_el = document.createElement('span')
         reps_el.classList.add('reps')
         reps_el.innerText = `Ripetizioni: ${reps}`
-        accordion.appendChild(reps_el)
+        content.appendChild(reps_el)
       }
       if (hold) {
         const hold_el = document.createElement('span')
         hold_el.classList.add('hold')
         hold_el.innerText = `Mantieni per: ${hold}`
-        accordion.appendChild(hold_el)
+        content.appendChild(hold_el)
       }
 
       // number of sets
       const sets_el = document.createElement('span')
       sets_el.classList.add('sets')
       sets_el.innerText = `Set: ${sets}`
-      accordion.appendChild(sets_el)
+      content.appendChild(sets_el)
 
       // rest time
       const rest_el = document.createElement('span')
       rest_el.classList.add('rest')
       rest_el.innerText = `Riposo: ${rest} secondi fra un set e l'altro`
-      accordion.appendChild(rest_el)
+      content.appendChild(rest_el)
 
       // weight
       if (weight) {
         const weight_el = document.createElement('span')
         weight_el.classList.add('weight')
         weight_el.innerText = `Peso suggerito: ${weight}`
-        accordion.appendChild(weight_el)
+        content.appendChild(weight_el)
       }
 
       // hints and caution messages
       makeHints(instructions, hints, warnings)
-        .forEach((msg) => accordion.appendChild(msg))
+        .forEach((msg) => content.appendChild(msg))
 
       // accordion with examples
       const examples_el = makeExamples(images)
-      accordion.appendChild(examples_el)
+      content.appendChild(examples_el)
 
       li.appendChild(accordion)
       list.appendChild(li)
