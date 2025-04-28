@@ -4,6 +4,7 @@ const nextButton = document.querySelector('#nextButton')
 
 const context = JSON.parse(sessionStorage.getItem('context')) ?? {}
 let currentStep = 0
+const start = new Date().getTime()
 
 const backHref = context.day
   ? `../exercise/index.html?day=${context.day}`
@@ -51,7 +52,10 @@ const makeSteps = (exercises) => {
           setNr: setIdx + 1,
           exerciseNr: exerciseIdx + 1,
           label,
-          data: {},
+          data: {
+            startTime: start,
+            totalExercises: exerciseIdx + 1,
+          },
         })
       }
     })

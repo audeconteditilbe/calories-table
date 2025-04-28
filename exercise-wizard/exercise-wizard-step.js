@@ -1,3 +1,9 @@
+const secondsReadable = (seconds) => {
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = seconds % 60
+  return `${minutes}m ${remainingSeconds}s`
+}
+
 class ExerciseWizardStep extends HTMLElement {
   constructor() {
     super()
@@ -38,17 +44,21 @@ class ExerciseWizardStep extends HTMLElement {
       content = `<rest-counter start=${rest} />`
     }
     else if (type === 'change-exercise') {
+      const { next } = data
       content = `
         <div class="intermezzo-step">
           <span>Prossimo esercizio:</span>
-          <h3>${data.next}</h3>
+          <h3>${next}</h3>
         </div>
       `
     } else if (type === 'finish') {
+      const { startTime, totalExercises } = data
       content = `
         <div class="intermezzo-step finish">
           <span>Brava!</span>
           <span>Hai completato l'allenamento!</span>
+          <span>Tempo totale: ${secondsReadable(Math.floor((new Date().getTime() - startTime) / 1000))}</span>
+          <span>Numero di esercizi: ${totalExercises}</span>
         </div>
       `
     }
