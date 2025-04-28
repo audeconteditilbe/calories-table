@@ -73,6 +73,11 @@ button {
   padding: 0.5rem 1rem;
   border: none;
   background-color: #e2e2e2;
+
+  &.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 }
 
 

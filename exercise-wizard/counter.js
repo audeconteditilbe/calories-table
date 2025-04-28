@@ -28,35 +28,50 @@ class HoldCounter extends HTMLElement {
       <link rel="stylesheet" href="../base.css">
       <link rel="stylesheet" href="./counter.css">
       <div class="counter hold">
-        <span class="message">Quando sei pronta premi "Inizio"</span>
-        <h3 id="count" class="count">${this.count}</h3>
-        <button id="startBtn">Inizo</button>
+        <span id="message" class="message">Quando sei pronta premi "Inizio"</span>
+        <h3 id="count" class="count" hidden>${this.start}</h3>
+        <button id="btn">Inizo</button>
       </div>
     `
     this.countEl = this.shadowRoot.querySelector('#count')
+    this.messageEl = this.shadowRoot.querySelector('#message')
+    this.btn = this.shadowRoot.querySelector('#btn')
 
-    this.startBtn = this.shadowRoot.querySelector('#startBtn')
-    this.startBtn.addEventListener('click', () => {
-      this.startCounter()
-      this.applyBackground()
+    this.btn.addEventListener('click', () => {
+      if (this.counting) {
+        this.reset()
+      } else {
+        this.countEl.hidden = false
+        this.messageEl.hidden = true
+        this.btn.textContent = '⟳'
+        this.startCounter()
+        this.counting = true
+      }
+      // this.applyBackground()
     })
 
-    this.addEventListener('next-step', () => {
-      clearInterval(this.intervalId)
-    })
-    this.addEventListener('prev-step', () => {
-      clearInterval(this.intervalId)
-    })
+    this.addEventListener('next-step', this.reset.bind(this))
+    this.addEventListener('prev-step', this.reset.bind(this))
   }
 
   disconnectedCallback() {
     clearInterval(this.intervalId)
   }
 
+  reset() {
+    clearInterval(this.intervalId)
+    this.messageEl.hidden = false
+    this.countEl.hidden = true
+    this.btn.textContent = 'Inizio'
+    this.counting = false
+    this.count = this.start
+    this.countEl.textContent = this.start
+  }
+
   updateCount() {
     if (this.countEl) {
       this.countEl.textContent = this.count
-      this.applyBackground()
+      // this.applyBackground()
     }
   }
 
@@ -73,12 +88,12 @@ class HoldCounter extends HTMLElement {
     }, 1000)
   }
 
-  applyBackground() {
-    const percentage = this.count / this.start
-    const index = Math.floor(COLORS.length - (COLORS.length * percentage))
-    const color = COLORS[index] ?? COLORS[0]
-    this.shadowRoot.querySelector('.counter').style.backgroundColor = color
-  }
+  // applyBackground() {
+  //   const percentage = this.count / this.start
+  //   const index = Math.floor(COLORS.length - (COLORS.length * percentage))
+  //   const color = COLORS[index] ?? COLORS[0]
+  //   this.shadowRoot.querySelector('.counter').style.backgroundColor = color
+  // }
 }
 
 class RestCounter extends HTMLElement {

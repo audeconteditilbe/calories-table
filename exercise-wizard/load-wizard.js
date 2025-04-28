@@ -91,22 +91,41 @@ const loadStep = ({
 }
 
 // handle steps navigation
-prevButton.addEventListener('click', () => emit('prev-step'))
-nextButton.addEventListener('click', () => emit('next-step'))
-container.addEventListener('prev-step', () => {
-  if (currentStep > 0) {
-    currentStep -= 1
-    loadStep(steps[currentStep], currentStep)
+const reactToNextStep = () => {
+  if (currentStep === steps.length - 1) {
+    nextButton.innerHTML = 'Fine'
+  } else {
+    nextButton.innerHTML = 'Avanti'
   }
-})
-container.addEventListener('next-step', () => {
+  if (currentStep === 0) {
+    prevButton.classList.add('disabled')
+    prevButton.setAttribute('disabled', true)
+  } else {
+    prevButton.classList.remove('disabled')
+    prevButton.removeAttribute('disabled')
+  }
+
+}
+const onNext = () => {
   if (currentStep < steps.length - 1) {
     currentStep += 1
     loadStep(steps[currentStep], currentStep)
   } else {
     window.location.href = backHref
   }
-})
+  reactToNextStep()
+}
+const onPrev = () => {
+  if (currentStep > 0) {
+    currentStep -= 1
+    loadStep(steps[currentStep], currentStep)
+  }
+  reactToNextStep()
+}
+prevButton.addEventListener('click', () => emit('prev-step'))
+nextButton.addEventListener('click', () => emit('next-step'))
+container.addEventListener('prev-step', onPrev)
+container.addEventListener('next-step', onNext)
 
 // init
 const steps = makeSteps(context.exercises)
