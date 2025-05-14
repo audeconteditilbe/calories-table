@@ -50,6 +50,7 @@ class HoldCounter extends HTMLElement {
       // this.applyBackground()
     })
 
+    this.addEventListener('count-over', this.reset.bind(this))
     this.addEventListener('next-step', this.reset.bind(this))
     this.addEventListener('prev-step', this.reset.bind(this))
   }
@@ -81,7 +82,7 @@ class HoldCounter extends HTMLElement {
       this.updateCount()
       if (this.count <= 0) {
         this.dispatchEvent(new CustomEvent(
-          'next-step',
+          'count-over',
           { bubbles: true, composed: true }
         ))
       }
